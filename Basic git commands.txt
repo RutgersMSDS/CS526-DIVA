@@ -1,0 +1,17 @@
+Basic git commands:
+
+git clone https://github.com/RutgersMSDS/CS526-DIVA.git
+
+cd CS526-DIVA
+
+git status
+
+git add '/path to file or folder'
+
+git commit -m 'message or description of changes what files you have add or feature or bugfixes.'
+
+git push
+
+git pull 
+
+git checkout -b 'branchname'
