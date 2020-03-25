@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .domain{
+            fill: none;
+            stroke: white;
+            stroke-width: 0.5;
+        }
+
+        .line {
+            fill: none;
+            stroke: #ffab00;
+            stroke-width: 1;
+        }
+        
+        .flex-container {
+            display: flex;
+            vertical-align: center;
+        }
+
+        .left
+        {
+            width:13%;
+            margin: 5px;
+        }
+
+        .middle
+        {
+            width:74%;
+            text-align: center;
+            margin: 5px;
+        }
+
+        .right
+        {
+            width:13%;
+			margin: 5px;
+        }
+
+        h1
+        {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+{% load static %}
+<script type="text/javascript" src="{%  static 'barChart.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scatterChart.js' %}"></script>
+<script type="text/javascript" src="{%  static 'lineChart.js' %}"></script>
+    <div>
+
+        <!-- Row 1-->
+        <div class="flex-container" width="100%" style="background-color: yellow">
+            <div class="left" style="background-color: black">
+                <h1 style="color:white;">Populization</h1>
+
+            </div>
+            <div class="middle">
+                <h2 id="stat"></h2>
+            </div>
+            <div class="right" style="text-align: center">
+                <h1>Statistics</h1>
+            </div>
+        </div>
+
+        <!-- Row 2-->
+        <div class="flex-container" width="100%" height="300px">
+            <div class="left" style="background-color: green">
+                <form style='padding-left:10px'>
+                    <label for="type_of_plot">Choose the Plot:</label>
+                    <select id="type_of_plot">
+                        <option value="Line">Line</option>
+                        <option value="Bar">Bar</option>
+                        <option value="Scatter">Scatter</option>
+                    </select><br><br>
+                    <label for="level_of_depth">Choose level of depth:</label>
+                    <select id="level_of_depth">
+                        <option value="World">World</option>
+                        <option value="Continent">Continent</option>
+                        <option value="Country">Country</option>
+                    </select><br><br>
+                    <input type="button" onclick="showChart()" value="PLOT IT">
+                </form><br>
+            </div>
+            <div id = "canvas" class="middle" style="background-color: black">
+                <svg id = "container" width="750" height="630">
+
+                </svg>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    store = {}
+    function showChart()
+    {
+        let type_of_plot = document.getElementById("type_of_plot").value;
+        let level_of_depth = document.getElementById("level_of_depth").value;
+        console.log(level_of_depth)
+        $.ajax(
+        {
+            url:"/showData",
+            success: function(result)
+            {
+                wp = JSON.parse(result).wp
+                console.log(wp.length)
+                drawChart(wp,type_of_plot)
+            }
+        });
+
+    }
+
+function drawChart(data,type_of_plot)
+{
+    //drawLine(data,20,0.5,"container");
+    switch(type_of_plot)
+        {
+            case "Scatter":
+                drawScatter(data,20,0.5,"container");
+                break;
+            case "Line":
+                drawLine(data,20,0.5,"container");
+                break;
+            case "Bar":
+                drawBar(data,20,0.5,"container");
+                break;
+        }
+}
+
+</script>
+</html>
