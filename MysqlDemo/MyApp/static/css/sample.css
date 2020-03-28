@@ -1,0 +1,40 @@
+.domain{
+    fill: none;
+    stroke: white;
+    stroke-width: 0.5;
+}
+
+.line {
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 1;
+}
+
+.flex-container {
+    display: flex;
+    vertical-align: center;
+}
+
+.left
+{
+    width:13%;
+    margin: 5px;
+}
+
+.middle
+{
+    width:74%;
+    text-align: center;
+    margin: 5px;
+}
+
+.right
+{
+    width:13%;
+    margin: 5px;
+}
+
+h1
+{
+    text-align: center;
+}

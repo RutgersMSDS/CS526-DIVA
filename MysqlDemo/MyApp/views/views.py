@@ -1,11 +1,9 @@
 from django.shortcuts import render, HttpResponse
-from MyApp import Q_PopulationGrowthTrends as qpgt
+from MyApp.models import Q_PopulationGrowthTrends as qpgt
 import json
 
-# Create your views here.
-
 def home(request):
-    return render(request,'home.html')
+    return render(request, 'home.html')
 
 def showData(request):
     context = {

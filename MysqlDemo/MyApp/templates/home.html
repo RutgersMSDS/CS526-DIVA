@@ -1,141 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .domain{
-            fill: none;
-            stroke: white;
-            stroke-width: 0.5;
-        }
-
-        .line {
-            fill: none;
-            stroke: #ffab00;
-            stroke-width: 1;
-        }
-        
-        .flex-container {
-            display: flex;
-            vertical-align: center;
-        }
-
-        .left
-        {
-            width:13%;
-            margin: 5px;
-        }
-
-        .middle
-        {
-            width:74%;
-            text-align: center;
-            margin: 5px;
-        }
-
-        .right
-        {
-            width:13%;
-			margin: 5px;
-        }
-
-        h1
-        {
-            text-align: center;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="static/css/sample.css">
 </head>
 <body>
 {% load static %}
-<script type="text/javascript" src="{%  static 'barChart.js' %}"></script>
-<script type="text/javascript" src="{%  static 'scatterChart.js' %}"></script>
-<script type="text/javascript" src="{%  static 'lineChart.js' %}"></script>
-    <div>
+<script type="text/javascript" src="{%  static 'scripts/app.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/barChart.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/lineChart.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/scatterChart.js' %}"></script>
 
-        <!-- Row 1-->
-        <div class="flex-container" width="100%" style="background-color: yellow">
-            <div class="left" style="background-color: black">
-                <h1 style="color:white;">Populization</h1>
+<div id="__MainContainer" style="padding-bottom: 0px;">
+    <div id="frmHome_container" class="slForm" style="padding:0% 0% 0% 0%">
+        <form id="frmHome" action="javascript:;"
+              class="kwt100" style="position: relative; height: 939px; overflow: hidden auto;">
 
-            </div>
-            <div class="middle">
-                <h2 id="stat"></h2>
-            </div>
-            <div class="right" style="text-align: center">
-                <h1>Statistics</h1>
-            </div>
-        </div>
+            <div class="kcell slFbox"
+                 style="position: absolute; z-index: 1; opacity: 1; overflow: hidden; box-shadow: none;
+                  border: 0px !important; background: transparent !important; width: 100%; height: 105px; left: 0px; top: 0px;">
 
-        <!-- Row 2-->
-        <div class="flex-container" width="100%" height="300px">
-            <div class="left" style="background-color: green">
-                <form style='padding-left:10px'>
-                    <label for="type_of_plot">Choose the Plot:</label>
-                    <select id="type_of_plot">
-                        <option value="Line">Line</option>
-                        <option value="Bar">Bar</option>
-                        <option value="Scatter">Scatter</option>
-                    </select><br><br>
-                    <label for="level_of_depth">Choose level of depth:</label>
-                    <select id="level_of_depth">
-                        <option value="World">World</option>
-                        <option value="Continent">Continent</option>
-                        <option value="Country">Country</option>
-                    </select><br><br>
-                    <input type="button" onclick="showChart()" value="PLOT IT">
-                </form><br>
-            </div>
-            <div id = "canvas" class="middle" style="background-color: black">
-                <svg id = "container" width="750" height="630">
+                <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
 
-                </svg>
-            </div>
-            <div class="right">
-            </div>
-        </div>
+                    <div class="kwt100  slFbox " id="frmHome_flexHeader" kwidgettype="FlexContainer" kformname="frmHome"
+                         style="position: relative; overflow: hidden; height: 100%;">
 
+                        <div class="kcell CopydefLabel0cf3c566e29dc49" style="position: absolute; z-index: 1;
+                         opacity: 1; overflow: hidden; border: 0px !important; background: transparent !important;
+                          width: 1013px; height: 21px; left: 126px; top: 65px;">
+
+                            <div id="frmHome_Description" kwidgettype="Label" kformname="frmHome"
+                                 class=" CopydefLabel0cf3c566e29dc49 cntmiddleleftalign disableSelection"
+                                 style="text-align: left; user-select: none; padding: 0px; white-space: nowrap;
+                                  width: 100%; height: 100%;">
+                                An interactive population density analyzing, and visualizing application based on International Census data from 1950-2050.
+                            </div>
+                        </div>
+
+                        <div class="kcell CopyslFbox0ec6ba7b7d8aa41" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 100%; height: 5px; left: 0px; top: 100px;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0ec6ba7b7d8aa41 " id="frmHome_partition"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                      overflow: hidden; height: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kcell CopydefLabel0e4ea8f0eac614f" style="position: absolute; z-index: 1;
+                        opacity: 1; overflow: hidden; border: 0px !important; background: transparent !important;
+                        width: 179px; height: 36px; left: 126px; top: 22px;">
+                            <div id="frmHome_AppName" kwidgettype="Label" kformname="frmHome"
+                            class=" CopydefLabel0e4ea8f0eac614f cntmiddleleftalign disableSelection"
+                            style="text-align: left; user-select: none; padding: 0px; white-space: nowrap; width: 100%; height: 100%;">
+                                                Populization
+                             </div>
+                        </div>
+
+                        <div class="kcell CopyslFbox0dfb3a51b9de448" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 100%; height: 102px; left: 0px; top: 0%;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0dfb3a51b9de448 " id="frmHome_Header1"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                      overflow: hidden; height: 100%;">
+
+                                    <div class="kcell slImage" style="position: absolute; z-index: 1; opacity: 1;
+                                     border: 0px !important; background: transparent !important; width: 75px;
+                                      height: 60px; left: 2.5%; top: 21%; font-size: 0px;">
+
+                                        <span id="frmHome_Header1_imageLogo_span" class=" middlecenteralign slImage"
+                                              style="width: 100%; font-size: 0px; display: block; height: 100%;
+                                              padding: 0px;" kmasterid="Header1">
+
+                                            <img class="" src="../static/res/logo.jpg" id="frmHome_Header1_imageLogo"
+                                                 kwidgettype="Image" kformname="frmHome" kmasterid="Header1"
+                                                 onload="$KW.Image.imgLoadHandler2(arguments[0])"
+                                                 onerror="$KU.imgLoadHandler(arguments[0],this)"
+                                                 style="font-size: 0px; opacity: 1; visibility: visible; width: 60px;
+                                                 height: 60px; transition: opacity 500ms ease-in-out 0s;">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kcell CopyslFbox0aa256162748d4a" style="position: absolute; z-index: 1; opacity: 1; overflow:
+             hidden; box-shadow: none; border: 0px !important; background: transparent !important; width: 100%;
+             height: 100%; left: 0px; top: 105px;">
+                <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+                    <div class="kwt100  CopyslFbox0aa256162748d4a " id="frmHome_flexBody" kwidgettype="FlexContainer"
+                         kformname="frmHome" style="position: relative; overflow: hidden; height: 100%;">
+
+                        <div class="kcell CopyslFbox0idd24cb8494c45" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 95%; height: 50%; left: 2.5%; top: 0px;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0idd24cb8494c45 " id="frmHome_flxLineChart"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                     overflow: hidden; height: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kcell CopyslFbox0g7e63a02829f45" style="position: absolute; z-index: 1; opacity: 1;
+                        overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                        width: 95%; height: 50%; left: 2.5%; top: 50%;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0g7e63a02829f45 " id="frmHome_flxChoropleth"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                     overflow: hidden; height: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+    <div id="appmenu_container" style="position:fixed;bottom:0px;width:100%">
+    </div>
+</div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    store = {}
-    function showChart()
-    {
-        let type_of_plot = document.getElementById("type_of_plot").value;
-        let level_of_depth = document.getElementById("level_of_depth").value;
-        console.log(level_of_depth)
-        $.ajax(
-        {
-            url:"/showData",
-            success: function(result)
-            {
-                wp = JSON.parse(result).wp
-                console.log(wp.length)
-                drawChart(wp,type_of_plot)
-            }
-        });
-
-    }
-
-function drawChart(data,type_of_plot)
-{
-    //drawLine(data,20,0.5,"container");
-    switch(type_of_plot)
-        {
-            case "Scatter":
-                drawScatter(data,20,0.5,"container");
-                break;
-            case "Line":
-                drawLine(data,20,0.5,"container");
-                break;
-            case "Bar":
-                drawBar(data,20,0.5,"container");
-                break;
-        }
-}
-
-</script>
 </html>

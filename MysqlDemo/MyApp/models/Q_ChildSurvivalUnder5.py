@@ -1,4 +1,4 @@
-from MyApp.models import MortalityLifeExpectancy
+from MyApp.models.models import MortalityLifeExpectancy
 
 def getInfantMortality():
     data = MortalityLifeExpectancy.objects.all()
