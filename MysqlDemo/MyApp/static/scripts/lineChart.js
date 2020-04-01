@@ -1,110 +1,145 @@
+function showLineChartForQuestion1(popData){
 
-function drawLine(sequence,xDiff,yDiff,svgId)
-{
-    let svg = d3.select("#"+svgId); // selects svg element
-    let margin = 100; // sets margin
-    let width = svg.attr("width") - margin; // width of x axis
-    console.log(svg.attr("width"))
-    let height = svg.attr("height") - margin; // height of y axis
-    
-    let xMax = d3.max(sequence, function(d){  // calculates maximum value of x for finding domain of x
-        return d.x;
-    });
+    let formatYear = d3.timeFormat("%Y");
+    let lineChartDiv = document.getElementById("lineChartDiv");
 
-    let yMax = d3.max(sequence, function(d){ // calculates maximum value of y for finding domain of y
-        return d.y;
-    });
+    var outerWidth  = lineChartDiv.clientWidth,
+        outerHeight = lineChartDiv.clientHeight;
 
-    let xMin = d3.min(sequence, function(d){  // calculates maximum value of x for finding domain of x
-        return d.x;
-    });
+    var margin = {top: 100, right: 40, bottom: 10, left: 40};
+    var width = outerWidth - margin.left - margin.right,
+        height = outerHeight - margin.top - margin.bottom;
 
-    let yMin = d3.min(sequence, function(d){ // calculates maximum value of y for finding domain of y
-        return d.y;
-    });
+    var margin = ({top: 20, right: 30, bottom: 30, left: 40});
 
-    let YAxisValuesDivider = 1;
-    let yAxisUnit = '';
-    if(yMin>999999999)
-    {
-        yAxisUnit = 'Billions';
-        YAxisValuesDivider = 1000000000;
-    }
-    else if(yMin>999999)
-    {
-        yAxisUnit = 'Millions';
-        YAxisValuesDivider = 1000000;
-    }
-    else if(yMin>999)
-    {
-        yAxisUnit = 'Thousands';
-        YAxisValuesDivider = 1000;
-    }
+    var minPopulation = d3.min(popData, function(d){ d['population'] = Math.floor(d['population']/1000000); return d['population']; });
+    var maxPopulation = d3.max(popData, function(d){ return d['population']; });
 
-    let count = (xMax - xMin)/xDiff + 1;
+    // Note: ok to leave this without units, implied "px"
+    var svg = d3.select("#lineChartDiv")
+        .append("svg")
+        .attr("border",1)
+        .attr("width",  outerWidth)
+        .attr("height", outerHeight);
 
-    xAxisValues = new Array(); // values of x to be shown on x axis
-    yAxisValues = new Array(); // values of y to be shown on y axis
+    var borderPath = svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("height", outerHeight)
+        .attr("width", outerWidth)
+        .style("stroke", "#000")
+        .style("fill", "none")
+        .style("stroke-width", 1);
 
-    nov = sequence.length;
-    
-    for(i=xMin;i<xMax+xDiff;i=i+xDiff)
-    {
-        xAxisValues.push(i);
-    }
-    for(j=0;j<=(yMax/YAxisValuesDivider);j++)
-    {
-        yAxisValues.push(j);
-    }
-    console.log(yAxisValues)
+    var g = svg.append("g")
+        .attr("id","canvas")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" +  margin.left + "," + margin.top + ")");
 
-    let xDomain = [xMin,xMax+xDiff]; // domain of x to be used for x axis scale
-    let yDomain = [0,(yMax+yDiff)/YAxisValuesDivider]; // domain of y to be used for y axis scale
+    var clip = g.append("clipPath")
+        .attr("id","clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
 
-    let xRange = [0,width]; // range of x to be used for x axis scale
-    let yRange = [height,0]; // range of y to be used for y axis scale
+    // interpolator for X axis -- inner plot region
+    var x = d3.scaleLinear()
+        .domain([1950,1980])
+        .range([0, width]);
 
-    let xScale = d3.scaleLinear()
-        .domain(xDomain)
-        .range(xRange)
+    // interpolator for Y axis -- inner plot region
+    var y = d3.scaleLinear()
+        .domain([minPopulation - 100, maxPopulation + 1000])
+        .range([height, 0]);
 
-    let yScale = d3.scaleLinear()
-        .domain(yDomain)
-        .range(yRange)
+    // SVG line generator
+    var line = d3.line()
+        .x(function(d) { return x(d.year); } )
+        .y(function(d) { return y(d.population); } );
 
-    let g = svg.append("g")
-        .attr('transform','translate('+margin/2+','+margin/2+')');
+    // request 5 ticks on the x axis
+    var xAxis = d3.axisBottom(x)
+        .ticks(20);
 
-    let xAxis = d3.axisBottom(xScale).tickValues(xAxisValues);
-    let yAxis = d3.axisLeft(yScale).tickValues(yAxisValues);
+    // y Axis
+    var yAxis = d3.axisLeft(y)
+        .ticks(10);
 
-    g.append("g")
-        .attr('transform','translate('+0+','+height+')')
-        .attr('stroke','white')
-        .call(xAxis);
-
-    g.append("g")
-        .attr('stroke','white')
+    var yAxisGroup = g.append("g")
+        .attr("class", "y-axis")
         .call(yAxis);
 
-    valueLine = d3.line()
-                    .x( (d) => xScale(d.x))
-                    .y( (d) => yScale(d.y/YAxisValuesDivider))
+    var xAxisGroup = g.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
 
-    g.append("path")
-        .datum(sequence)
-        //.attr('class','bar')
-        .attr('d',valueLine)
-        .attr('class','line')
+    var line = d3.line()
+        .x(function(d) { return x(d.year); })
+        .y(function(d) { return y(d.population); });
 
-        g.selectAll(".circle")
-        .data(sequence)
-        .enter()
-        .append('circle')
-        .attr('class','cir')
-        .attr('cx', (d) => xScale(d.x)+margin)
-        .attr('cy', (d) => yScale(d.y))
-        .attr('r',15)
-        .attr('fill','white')
+    var zoom = d3.zoom()
+        .scaleExtent([0,2])
+        .on("zoom",zoomed);
+
+    // Define the div for the tooltip
+    var div = d3.select("#lineChartDiv").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    var linePlot = g.append("path")
+        .attr("height", height)
+        .attr("width", width)
+        .attr("class", "linePath")
+        .attr("clip-path", "url(#clip)")
+        .attr("d", line(popData))
+        .style('fill', 'none')
+        .style('stroke', '#fff')
+        .transition()
+        .delay(500)
+        .duration(1000)
+        .style('stroke', '#159db3')
+        .style('stroke-width',"2");
+
+    var scatterPlot = g.selectAll(".dot")
+        .data(popData)
+        .enter().append("circle")
+        .attr("class", "dotScatter")
+        .style('stroke', '#306c75')
+        .attr("clip-path", "url(#clip)")
+        .attr("cx", function(d) { return x(d.year); } )
+        .attr("cy", function(d) { return y(d.population); } )
+        .attr("r", 2.25)
+        .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div	.html("<b>Year: </b>" + formatYear(d.year) + "<br/><b>Population: </b>"  + d.population + "M")
+                .style("left", (d3.event.pageX - margin.left - 57) + "px")
+                .style("top", (d3.event.pageY - margin.top - margin.bottom - 100) + "px");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
+
+    function zoomed() {
+        xAxisGroup.call(xAxis.scale(d3.event.transform.rescaleX(x)));
+        var new_x = d3.event.transform.rescaleX(x);
+
+        d3.selectAll(".dotScatter")
+            .data(popData)
+            .attr("cx", function(d) { return new_x(d.year); } );
+
+        line.x(function(d) { return  new_x(d.year); });
+
+        d3.select(".linePath")
+            .attr("d", line(popData))
+            .style('stroke', '#159db3');
 
     }
+
+    svg.call(zoom);
+}

@@ -1,35 +1,26 @@
-store = {};
-function showChart()
+function showQuestion1()
 {
-    let type_of_plot = document.getElementById("type_of_plot").value;
-    let level_of_depth = document.getElementById("level_of_depth").value;
-    console.log(level_of_depth)
-    $.ajax(
-        {
-            url:"/showData",
-            success: function(result)
-            {
-                wp = JSON.parse(result).wp
-                console.log(wp.length)
-                drawChart(wp,type_of_plot)
-            }
+    // $.ajax(
+    //     {
+    //         url:"/",
+    //         success: function(result)
+    //         {
+    //             wp = JSON.parse(result).wp
+    //             console.log(wp.length)
+    //             drawChart(wp,type_of_plot)
+    //         }
+    //     });
+
+    d3.json("/static/data/worldData.json")
+        .then(function(data) {
+
+            popData = data.population;
+            areaData = data.area;
+
+            showLineChartForQuestion1(popData);
+            showBubbleChartForQuestion1(areaData);
+            showChoroplethForQuestion1(popData, areaData);
         });
 
-}
 
-function drawChart(data,type_of_plot)
-{
-    //drawLine(data,20,0.5,"container");
-    switch(type_of_plot)
-    {
-        case "Scatter":
-            drawScatter(data,20,0.5,"container");
-            break;
-        case "Line":
-            drawLine(data,20,0.5,"container");
-            break;
-        case "Bar":
-            drawBar(data,20,0.5,"container");
-            break;
-    }
 }
