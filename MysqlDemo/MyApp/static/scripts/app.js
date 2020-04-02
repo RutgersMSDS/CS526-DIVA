@@ -1,5 +1,6 @@
 var chartName = 'Line Chart';
 var selectedCountryNamesList = [];
+var currentPlotDepth = "World";
 var wp={};
 var wpSliced = {};
 var continentp;
@@ -166,31 +167,30 @@ function showChart(chartName)
             break;
     }
     areaData = [
-		{
-			"name": "World",
-			"area": 148429000
-		}, {
-			"name": "Asia",
-			"area": 44579000
-		}, {
-			"name": "Africa",
-			"area": 30065000
-		}, {
-			"name": "North America",
-			"area": 24256000
-		}, {
-			"name": "South America",
-			"area": 17819000
-		}, {
-			"name": "Europe",
-			"area": 9938000
-		},  {
-			"name": "Oceania",
-			"area": 7687000
-		}
-	];
+        {
+            "name": "World",
+            "area": 148429000
+        }, {
+            "name": "Asia",
+            "area": 44579000
+        }, {
+            "name": "Africa",
+            "area": 30065000
+        }, {
+            "name": "North America",
+            "area": 24256000
+        }, {
+            "name": "South America",
+            "area": 17819000
+        }, {
+            "name": "Europe",
+            "area": 9938000
+        },  {
+            "name": "Oceania",
+            "area": 7687000
+        }
+    ];
     showBubbleChartForQuestion1(areaData);
-    //showChoroplethForQuestion1(wpSliced, areaData);
     drawMap();
 }
 
@@ -237,32 +237,29 @@ function plotWorld()
     });
 }
 
-function plotContinents()
+function plotContinents(selectedContinentNames)
 {
     blankSlate();
     wp = {};
     wpSliced = {};
-    //var wp;
-    //continentNames = document.getElementById("continents").value;
-    continentNames = ["Asia","Africa","Europe","Oceania","North America","South America"];
-    continentNames = JSON.stringify(continentNames)
+
     //d3.select("#plotText").text(continentNames)
-    console.log(continentNames);
+
     $.ajax(
         {
             type: "POST",
             data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
-                'continents':continentNames
+                'continents':selectedContinentNames
             },
             url:"/showContinentsData",
             success: function(result)
             {
-                data = JSON.parse(result).cp
+                data = JSON.parse(result).cp;
                 //console.log(data['populationList'])
-                wp = data['populationList']
-                console.log(wp)
-                sliceWp();
-                //drawLine(wp.slice(startIndex,endIndex+1),"svg","xAxis","yAxis","plot")
+                contintents = data['populationList'];
+                for(var continent in selectedContinentNames) {
+                    wpSliced[continent] = contintents[continent].slice(startIndex,endIndex+1)
+                }
                 showChart(chartName);
             }
         });
@@ -293,6 +290,7 @@ function plotCountries()
                 console.log(wp)
                 sliceWp();
                 //drawLine(wp.slice(startIndex,endIndex+1),"svg","xAxis","yAxis","plot")
+                currentPlotDepth = "Countries";
                 showChart(chartName);
             }
         });

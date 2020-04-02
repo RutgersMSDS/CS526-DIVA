@@ -13,7 +13,7 @@ function showBubbleChartForQuestion1(areaData) {
     var svg = null;
     var bubbles = null;
     var labels, labelArea = null;
-    var nodes = [];
+    var nodes = [], selectedContinentNames = [];
 
     svg = d3.select("#bubbleChartDiv")
         .append("svg")
@@ -34,9 +34,13 @@ function showBubbleChartForQuestion1(areaData) {
     simulation.stop();
 
     var fillColour = d3.scaleOrdinal()
-        .domain([148429000, 44579000, 30065000, 24256000, 17819000, 13209000, 9938000, 7687000])
-        .range(["#E55934",  "#3AB795", "#6162f3", "#70161E",
-            "#6F257F", "#2C5634", "#3891A6", "#E6D246"]);
+        .domain(["World", "Asia", "Africa", "North America", "South America", "Europe", "Oceania",
+            "World#", "Asia#", "Africa#", "North America#", "South America#", "Europe#", "Oceania#"])
+        .range([
+            "#5B3582",  "#2176FF", "#F72C25", "#E4FF1A",
+            "#FF5714", "#1BE7FF", "#084887",
+            "#221430", "#0C2B5D", "#5A100E", "#535D0A",
+            "#5D2008", "#20A39E", "#031B32"]);
 
     function createNodes(rawData) {
         var maxSize = d3.max(rawData, d => +d.area/1000000000);
@@ -75,11 +79,34 @@ function showBubbleChartForQuestion1(areaData) {
             .append('circle')
             .classed('bubble', true)
             .attr('r', d => Math.round(d.radius))
-            .attr('fill', d => fillColour(d.area));
+            .attr('fill', d => fillColour(d.area))
+            .on('mousedown.log', function (d) {
+                if(d.name === "World") {
+                    if(currentPlotDepth !== "World") {
+                        currentPlotDepth = "World";
+                        plotWorld();
+                    }
+                } else {
+                    currentPlotDepth = "Continent";
+                    if (selectedContinentNames.includes(d.name)) {
+                        selectedContinentNames.splice(selectedContinentNames.indexOf(d.Name), 1);
+                        d3.select(this).attr('fill', fillColour(d.area));
+                        d3.selectAll(".bubbleText." + d.name)
+                            .attr('fill', '#000000');
+                        plotContinents(selectedContinentNames);
+                    } else {
+                        selectedContinentNames.push(d.name);
+                        d3.select(this).attr('fill', fillColour(d.area + "#"));
+                         d3.selectAll(".bubbleText." + d.name).attr('fill', '#ffffff');
+                        plotContinents(selectedContinentNames);
+                    }
+                }
+            });
 
         // labels
         labels = elements
             .append('text')
+            .attr("class", d => "bubbleText " + d.name)
             .attr('dy', '.3em')
             .style('text-anchor', 'middle')
             .style('font-size', 16)
@@ -87,6 +114,7 @@ function showBubbleChartForQuestion1(areaData) {
 
         labelArea = elements
             .append('text')
+            .attr("class", d => "bubbleText " + d.name)
             .attr('dy', '1.5em')
             .style('text-anchor', 'middle')
             .style('font-size', 13)
@@ -99,9 +127,6 @@ function showBubbleChartForQuestion1(areaData) {
             .restart();
     };
 
-    // callback function called after every tick of the force simulation
-    // here we do the actual repositioning of the circles based on current x and y value of their bound node data
-    // x and y values are modified by the force simulation
     function ticked() {
         bubbles
             .attr('cx', d => d.x)
