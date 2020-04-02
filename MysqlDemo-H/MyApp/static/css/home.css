@@ -1,0 +1,91 @@
+.kwt100 {
+    width: 100%
+}
+
+.ButtonLinkFocusSkin,.CopyLink0aaf32d008e014c,.CopyLink0df8778f358cf45,.CopyLink0he3766aa39d245,.CopyLink0jbf2ae5d820644,.Link2,.CopydefLabel0cf3c566e29dc49,.CopydefLabel0d5728061204344,.CopydefLabel0e4ea8f0eac614f,.CopydefLabel0h8bda83362cd46,.Label2,.defLabel,.sknLblDescription,.sknLblRowHeading,.sknLblStrip,.sknLblTimeStamp,.sknSectionHeaderLabelSkin,.slForm,.slWatchForm,.slPopup {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    color: #000;
+    border: 0;
+    background: transparent
+}
+.CopyslFbox0ec6ba7b7d8aa41 {
+    border: 0px solid #000000;
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.21);
+}
+
+.CopydefLabel0cf3c566e29dc49 {
+    font: normal 400 18.4px Georgia;
+    color: #333;
+    background-color: rgba(0,0,0,0.0)
+}
+
+.CopydefLabel0e4ea8f0eac614f {
+    font: normal 400 32.0px Georgia;
+    color: #0600b8;
+    background-color: rgba(0,0,0,0.0)
+}
+
+.CopyslFbox0g7e63a02829f45 {
+    border: 0px solid #000000;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.CopyslFbox0idd24cb8494c45 {
+    border: 0px solid #000000;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+#frmHome_Header1_Link1:active:not([kdisabled='true']),#frmHome_Header1_Link2:active:not([kdisabled='true']),#frmHome_Header1_Link3:active:not([kdisabled='true']),#frmHome_Header1_Link4:active:not([kdisabled='true']),#HeaderDesc_Link1:active:not([kdisabled='true']),#HeaderDesc_Link2:active:not([kdisabled='true']),#HeaderDesc_Link3:active:not([kdisabled='true']),#HeaderDesc_Link4:active:not([kdisabled='true']) {
+    font: normal normal 14.1px Helvetica;
+    color: #6fa0f4;
+    background: rgba(255,255,255,0.0)
+}
+
+#frmHome_Header1_Link1:hover,#HeaderDesc_Link1:hover {
+    font: normal normal 14.1px Helvetica;
+    color: #6fa0f4;
+    background: rgba(255,255,255,0.0)
+}
+
+#frmHome_Header1_Link2:hover,#HeaderDesc_Link2:hover {
+    font: normal normal 14.1px Helvetica;
+    color: #6fa0f4;
+    background: rgba(255,255,255,0.0)
+}
+
+#frmHome_Header1_Link3:hover,#HeaderDesc_Link3:hover {
+    font: normal normal 14.1px Helvetica;
+    color: #6fa0f4;
+    background: rgba(255,255,255,0.0)
+}
+
+#frmHome_Header1_Link4:hover,#HeaderDesc_Link4:hover {
+    font: normal normal 14.1px Helvetica;
+    color: #6fa0f4;
+    background: rgba(255,255,255,0.0)
+}
+
+.kcell {
+    display: table-cell
+}
+
+.hide {
+    display: none!important
+}
+
+.hidden {
+    visibility: hidden
+}
+
+.show {
+    display: block
+}
+
+.auto {
+    width: auto
+}

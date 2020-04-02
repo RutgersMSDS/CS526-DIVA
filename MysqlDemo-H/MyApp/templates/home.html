@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="static/css/sample.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    {% load static %}
+    <script type="text/javascript" src="{%  static 'scripts/app.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'scripts/bubble.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'scripts/lineChart2.js' %}"></script>
+    
+
+    <style>
+        .sphere {
+            fill: #4242e4;
+        }
+        
+        .country {
+        
+            stroke: black;
+            stroke-opacity: 0.1;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="__MainContainer" style="padding-bottom: 0px;">
+    <div id="frmHome_container" class="slForm" style="padding:0% 0% 0% 0%">
+        <form id="frmHome" action="javascript:;"
+              class="kwt100" style="position: relative; height: 1300px; overflow: hidden auto;">
+
+            <!-- Header -->
+            <div class="kcell slFbox"
+                 style="position: absolute; z-index: 1; opacity: 1; overflow: hidden; box-shadow: none;
+                  border: 0px !important; background: transparent !important; width: 100%; height: 105px; left: 0px; top: 0px;">
+
+                <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                    <div class="kwt100  slFbox " id="frmHome_flexHeader" kwidgettype="FlexContainer" kformname="frmHome"
+                         style="position: relative; overflow: hidden; height: 100%;">
+
+                        <div class="kcell CopydefLabel0cf3c566e29dc49" style="position: absolute; z-index: 1;
+                         opacity: 1; overflow: hidden; border: 0px !important; background: transparent !important;
+                          width: 1013px; height: 21px; left: 126px; top: 65px;">
+
+                            <div id="frmHome_Description" kwidgettype="Label" kformname="frmHome"
+                                 class=" CopydefLabel0cf3c566e29dc49 cntmiddleleftalign disableSelection"
+                                 style="text-align: left; user-select: none; padding: 0px; white-space: nowrap;
+                                  width: 100%; height: 100%;">
+                                An interactive population density analyzing, and visualizing application based on International Census data from 1950-2050.
+                            </div>
+                        </div>
+
+                        <div class="kcell CopyslFbox0ec6ba7b7d8aa41" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 100%; height: 5px; left: 0px; top: 100px;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0ec6ba7b7d8aa41 " id="frmHome_partition"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                      overflow: hidden; height: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="kcell CopydefLabel0e4ea8f0eac614f" style="position: absolute; z-index: 1;
+                        opacity: 1; overflow: hidden; border: 0px !important; background: transparent !important;
+                        width: 179px; height: 36px; left: 126px; top: 22px;">
+                            <div id="frmHome_AppName" kwidgettype="Label" kformname="frmHome"
+                                 class=" CopydefLabel0e4ea8f0eac614f cntmiddleleftalign disableSelection"
+                                 style="text-align: left; user-select: none; padding: 0px; white-space: nowrap; width: 100%; height: 100%;">
+                                Populization
+                            </div>
+                        </div>
+
+                        <div class="kcell CopyslFbox0dfb3a51b9de448" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 100%; height: 102px; left: 0px; top: 0%;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0dfb3a51b9de448 " id="frmHome_Header1"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                      overflow: hidden; height: 100%;">
+
+                                    <div class="kcell slImage" style="position: absolute; z-index: 1; opacity: 1;
+                                     border: 0px !important; background: transparent !important; width: 75px;
+                                      height: 60px; left: 2.5%; top: 21%; font-size: 0px;">
+
+                                        <span id="frmHome_Header1_imageLogo_span" class=" middlecenteralign slImage"
+                                              style="width: 100%; font-size: 0px; display: block; height: 100%;
+                                              padding: 0px;" kmasterid="Header1">
+
+                                            <img class="" src="../static/img/logo.jpg" id="frmHome_Header1_imageLogo"
+                                                 kwidgettype="Image" kformname="frmHome" kmasterid="Header1"
+                                                 style="font-size: 0px; opacity: 1; visibility: visible; width: 60px;
+                                                 height: 60px; transition: opacity 500ms ease-in-out 0s;">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="kcell CopyslFbox0aa256162748d4a" style="position: absolute; z-index: 1; opacity: 1; overflow:
+             hidden; box-shadow: none; border: 0px !important; width: 100%; height: 100%; left: 0px; top: 105px;
+              background-color: rgba(0, 0, 0, 0.21);">
+                <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+                    <div class="kwt100  CopyslFbox0aa256162748d4a " id="frmHome_flexBody" kwidgettype="FlexContainer"
+                         kformname="frmHome" style="position: relative; overflow: hidden; height: 100%;">
+
+                        <!-- Options -->
+                        <div class="kcell" style="position: absolute; z-index: 1; opacity: 1;
+                         overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                          width: 95%; height: 2.5%; left: 2.5%; top: 0px;">
+                            <button id="defaultOpen" class="tablinks btn btn-primary"
+                                    onclick="changeChart(event, 'Line Chart')">Line Chart</button>
+                            <button class="tablinks btn btn-secondary" onclick="changeChart(event, 'Bar Chart')">
+                                Bar Chart</button>
+                            <!--button class="tablinks" onclick="changeChart(event, 'Scatter Chart')">Pie Chart</button>
+                             -->
+                        </div>
+
+                        <!-- Line Chart -->
+                        <div class="kcell CopyslFbox0idd24cb8494c45" style="position: absolute; z-index: 1; opacity: 1;
+                        overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                        width: 95%; height: 49%; left: 2.5%; top: 2.5%;">
+
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0idd24cb8494c45 " id="frmHome_flxLineChart"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                     overflow: hidden; height: 100%;">
+
+                                    <div id="line-chart" >
+                                        <div class="content-text" style="margin-top: 1%"><span>World level population</span></div>
+                                        <br>
+                                        <div id="lineChartDiv">
+                                            <svg id="line_bar_scatter">
+                                                <rect id="chartRect" style="fill:none; stroke:black; stroke-width:5; opacity:0.5"></rect>
+                                                <g id="container">
+                                                    <text id="xAxisText">Year</text>
+                                                    <g id="xAxis"></g>
+
+                                                    <text id="yAxisText">Population</text>
+                                                    <g id="yAxis"></g>
+
+                                                    <g id="searchLineX"></g>
+                                                    <g id="searchLineY"></g>
+
+                                                    <g id="plot"></g>
+
+                                                    <text id="rangeStart">Start year: </text>
+                                                    <g id="Start_Slider"></g>
+
+                                                    <text id="rangeEnd">End year: </text>
+                                                    <g id="End_Slider"></g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Choropleth -->
+                        <div class="kcell CopyslFbox0g7e63a02829f45" style="position: absolute; z-index: 1; opacity: 1;
+                        overflow: hidden; box-shadow: none; border: 0px !important; background: transparent !important;
+                        width: 95%; height: 45%; left: 2.5%; top: 51.5%;">
+                            <div id="flexcontainer_wrapper" class=" " style="width: 100%; height: 100%;">
+
+                                <div class="kwt100  CopyslFbox0g7e63a02829f45 " id="frmHome_flxChoropleth"
+                                     kwidgettype="FlexContainer" kformname="frmHome" style="position: relative;
+                                     overflow: hidden; height: 100%;">
+                                    <div style="display:flex">
+                                        <div id="continentBubble" style="flex: 0 0 50%;">
+                                            <div class="content-text">
+                                                Continent level population (Area in million sq.km units)
+                                            </div>
+                                            <div id="bubbleChartDiv" style="flex: 0 0 50%;"></div>
+                                            <div id="barChartDiv" style="flex: 0 0 50%;"></div>
+
+                                        </div>
+                                        <div  id="world-map" style="flex: 0 0 50%;">
+                                            <div class="content-text">
+                                                Country level (select at most 10 countries)
+                                            </div>
+                                            <div id="choroplethDiv" style="flex: 0 0 50%;">
+                                                <svg id="map" width="100%" height="100%">
+                                                    <g id="gMap">
+                                                        <rect style="fill:yellow"></rect>
+                                                    </g>
+                                                    <g id="Choropleth_Slider" style="left:50px">
+                                                        
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Footer -->
+                        <div style="text-align:center; position: absolute; width: 100%; height: 3.5%; left: 0px; top: 96.5%;">
+                            <span>©&nbsp;2020&nbsp;-Rutgers University.<br/>Special thanks to US Census Bureau for providing the data.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
