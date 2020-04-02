@@ -10,8 +10,6 @@ function showLineChartForQuestion1(popData){
     var width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
 
-    var margin = ({top: 20, right: 30, bottom: 30, left: 40});
-
     var minPopulation = d3.min(popData, function(d){ d['population'] = Math.floor(d['population']/1000000); return d['population']; });
     var maxPopulation = d3.max(popData, function(d){ return d['population']; });
 
@@ -124,6 +122,18 @@ function showLineChartForQuestion1(popData){
                 .duration(500)
                 .style("opacity", 0);
         });
+
+    /*
+      <text id="plotText" transform="translate(450,50)">World</text>
+       <g id="plot" transform="translate(150,0)"></g>
+
+       <text transform="translate(0,600)">START YEAR</text>
+       <g id="Start_Slider" transform="translate(120,590)"></g>
+
+        <text transform="translate(0,650)">END YEAR</text>
+        <g id="End_Slider" transform="translate(120,640)"></g>
+
+     */
 
     function zoomed() {
         xAxisGroup.call(xAxis.scale(d3.event.transform.rescaleX(x)));

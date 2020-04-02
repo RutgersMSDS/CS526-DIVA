@@ -22,6 +22,7 @@ $.ajax(
         {
             data = JSON.parse(result).wp;
             wp = data['populationList'];
+            //wpSliced = wp;
             console.log(wp);
             clickLineChart();
             initializeSliders();
@@ -81,24 +82,20 @@ function drawMap()
 
 function clickLineChart()
 {
-    document.getElementById("defaultOpen").click();
+    document.getElementById("defaultOpen").click(); // select line chart tab by default
 }
 
 function initializeSliders()
 {
-    var minStart = 1950, maxStart = 2050,
-        minEnd = 1950, maxEnd = 2050;
-
-    gStart = d3.select("#Start_Slider");
-    gEnd = d3.select("#End_Slider");
+    gStart = d3.select("#Start_Slider")
+    gEnd = d3.select("#End_Slider")
 
     sliderStart = d3
         .sliderHorizontal()
-        .min(minStart)
-        .max(maxStart)
+        .min(1950)
+        .max(2050)
         .step(1)
-        .width(500)
-        .fill("#eee")
+        .width(900)
         .displayValue(true)
         .on('onchange', val => {
             startYear = parseInt(val);
@@ -108,12 +105,11 @@ function initializeSliders()
 
     sliderEnd = d3
         .sliderHorizontal()
-        .min(minEnd)
-        .max(maxEnd)
+        .min(1950)
+        .max(2050)
         .step(1)
-        .width(500)
+        .width(900)
         .default(2050)
-        .fill("#0600b8")
         .displayValue(true)
         .on('onchange', val => {
             endYear = parseInt(val);
@@ -121,12 +117,8 @@ function initializeSliders()
             showChart(chartName);
         });
 
-    gStart.call(sliderStart);
-    d3.select("#Start_Slider")
-        .selectAll(".track-inset")
-        .attr("stroke", "#0600b8");
-
-    gEnd.call(sliderEnd);
+    gStart.call(sliderStart)
+    gEnd.call(sliderEnd)
 }
 
 function setSliderStart(sy)
@@ -134,6 +126,7 @@ function setSliderStart(sy)
     startYear = sy;
     startIndex = startYear-1950;
     sliderStart.value(sy);
+    //sliceWp();
 }
 
 function setSliderEnd(ey)
@@ -141,17 +134,22 @@ function setSliderEnd(ey)
     endYear = ey;
     endIndex = endYear - 1950;
     sliderEnd.value(ey);
+    //sliceWp();
 }
 
-// slices data according to currently selected year range
-function sliceWp() {
-    for(var key in wp) {
+function sliceWp() // slices data according to currently selected year range
+{
+    for(var key in wp)
+    {
+        //console.log(wp[key])
         wpSliced[key]=wp[key].slice(startIndex,endIndex+1)
+        //console.log(wpSliced[key])
     }
 }
 
 function showChart(chartName)
 {
+    console.log("showChart called")
     sliceWp();
     switch(chartName)
     {
@@ -165,32 +163,6 @@ function showChart(chartName)
             drawScatter(wp.slice(startIndex,endIndex+1),"svg","xAxis","yAxis","plot");
             break;
     }
-    areaData = [
-		{
-			"name": "World",
-			"area": 148429000
-		}, {
-			"name": "Asia",
-			"area": 44579000
-		}, {
-			"name": "Africa",
-			"area": 30065000
-		}, {
-			"name": "North America",
-			"area": 24256000
-		}, {
-			"name": "South America",
-			"area": 17819000
-		}, {
-			"name": "Europe",
-			"area": 9938000
-		},  {
-			"name": "Oceania",
-			"area": 7687000
-		}
-	];
-    showBubbleChartForQuestion1(areaData);
-    //showChoroplethForQuestion1(wpSliced, areaData);
     drawMap();
 }
 
@@ -225,16 +197,20 @@ function blankSlate()
 
 function plotWorld()
 {
-    $.ajax({
-        url:"/showWorldData",
-        success: function(result)
+    $.ajax(
         {
-            data = JSON.parse(result).wp
-            wp = data['populationList']
-            console.log(wp)
-            showChart(chartName);
-        }
-    });
+            url:"/showWorldData",
+            success: function(result)
+            {
+                data = JSON.parse(result).wp
+                wp = data['populationList']
+                console.log(wp)
+                showChart(chartName);
+                //clickLineChart();
+                //initializeSliders();
+                //drawChart(wp,type_of_plot)
+            }
+        });
 }
 
 function plotContinents()

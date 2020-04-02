@@ -4,8 +4,13 @@ from MyApp import views
 
 urlpatterns = [
     path('', views.home),
-    path('showData',views.showData),
+    path('showWorldData',views.showWorldData),
+    path('showContinentsData',views.showContinentData),
+    path('showCountryData',views.showCountryData),
     path('barChart.js',views.barChart),
-    path('lineChart.js',views.lineChart),
+    path('lineChartNew.js',views.lineChartNew),
+    path('worldData',views.worldData),
+    path('continentData',views.continentData),
+    path('countryData',views.countryData)
 ]
 

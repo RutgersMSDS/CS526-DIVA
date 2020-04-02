@@ -55,48 +55,6 @@ function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
         if (tempyMin<yMin) {yMin = tempyMin}
     }
 
-    //console.log("xMin is "+xMin);
-    //console.log("xMax is "+xMax);
-    //console.log("yMin is "+yMin);
-    //console.log("yMax is "+yMax);
-    
-    /*var xMax = d3.max(wpSliced, function(d){  // calculates maximum value of x for finding domain of x
-        return d.year;
-    });
-
-    yMax = d3.max(wpSliced, function(d){ // calculates maximum value of y for finding domain of y
-        return d.population;
-    });
-    
-    xMin = d3.min(wpSliced, function(d){  // calculates maximum value of x for finding domain of x
-        return d.year;
-    });
-    
-
-    yMin = d3.min(wpSliced, function(d){ // calculates maximum value of y for finding domain of y
-        return d.population;
-    });
-    console.log(yMin);
-    console.log(yMax);*/
-    /*let YAxisValuesDivider = 1;
-    let yAxisUnit = '';
-    if(yMin>999999999)
-    {
-        yAxisUnit = 'Billions';
-        YAxisValuesDivider = 1000000000;
-    }
-    else if(yMin>999999)
-    {
-        yAxisUnit = 'Millions';
-        YAxisValuesDivider = 1000000;
-    }
-    else if(yMin>999)
-    {
-        yAxisUnit = 'Thousands';
-        YAxisValuesDivider = 1000;
-    }
-    */
-
     //let count = (xMax - xMin)/xDiff + 1;
     if((xMax-xMin)>80)
     {
@@ -131,22 +89,6 @@ function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
     }
     
     console.log(yMax - yMin)
-    /*if(yMin<25000000)
-    {
-        yDiff = 25000000;
-    }
-    else if(yMin<50000000)
-    {
-        yDiff = 50000000;
-    }
-    else if(yMin<1000000000)
-    {
-        yDiff = 100000000;
-    }
-    else
-    {
-        yDiff = 1000000000;
-    }*/
 
     if(yMax>10000000000)
     {
@@ -219,10 +161,7 @@ function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
                     .tickValues(xAxisValues);
 
     let yAxis = d3.axisLeft(yScale).tickValues(yAxisValues);
-    //let g = svg.append("g")  .attr('transform','translate('+margin/2+','+margin/2+')');
-    //let gChart = d3.select("#chart").attr('transform','translate(100,0)').attr('stroke','black')
-    //.attr('fill','none')
-    //gChart.append("g").attr('transform','translate(0,300)').call(xAxis)
+
     gxAxis.call(xAxis)
 
     gyAxis.call(yAxis);

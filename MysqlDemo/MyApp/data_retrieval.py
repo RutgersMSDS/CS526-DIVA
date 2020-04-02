@@ -1,5 +1,5 @@
 
-from MyApp.models.models import CountryPopulation, ContinentPopulation, WorldPopulation
+from MyApp.models import CountryPopulation, ContinentPopulation, WorldPopulation
 
 def getWorldPopulation():
     q = WorldPopulation.objects.all()
@@ -40,3 +40,5 @@ def getCountryPopulation(country_name, year):
         if country_name==n and year==y:
             return q[i].midyear_population
         i = i+1
+
+def 

@@ -203,7 +203,7 @@ hr.style1 {
 .toolTip {
     position: absolute;
     display: none;
-    min-width: 80px;
+    min-width: 150px;
     height: auto;
     background: none repeat scroll 0 0 #ffffff;
     border: 1px solid #6F257F;
@@ -219,118 +219,6 @@ text{
 
 .details{
     color: white;
-}
-
-/* FOR LINE CHART */
-#lineChartDiv {
-    width: 95%;
-    height: 428px;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-}
-
-.axis {
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #D4D8DA;
-    stroke-width: 2px;
-    shape-rendering: crispEdges;
-}
-
-.line {
-    fill: none;
-    stroke: #6F257F;
-    stroke-width: 5px;
-}
-
-.overlay {
-    fill: none;
-    pointer-events: all;
-}
-
-.focus circle {
-    fill: #F1F3F3;
-    stroke: #6F257F;
-    stroke-width: 5px;
-}
-
-.hover-line {
-    stroke: #6F257F;
-    stroke-width: 2px;
-    stroke-dasharray: 3,3;
-}
-
-/* FOR US STATE MAP */
-#us-vis {
-    width: 50%;
-    height: 600px;
-    /* border: 5px solid green; */
-    padding: 15px;
-    margin: 5px;
-    float: left;
-}
-
-#us-info {
-    width: 30%;
-    height: 200px;
-    /* border: 5px solid green; */
-    padding: 15px;
-    margin: 5px;
-    float: left;
-}
-
-.us-wrapper > div {
-    font-size: 14px;
-    border: 2px solid rgb(53, 74, 122);
-    border-radius: 5px;
-    background-color: rgb(180, 209, 252);
-    padding: 1em;
-    color: #001f3f;
-}.us-wrapper {
-     display: grid;
-     grid-template-columns: repeat(2, 1fr);
-     grid-gap: 5px;
-     grid-auto-rows: minmax(40px, auto);
- }
-.us-one {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-}
-.us-two {
-    grid-column: 2 / 3;
-    grid-row: 1 / 3;
-}
-.us-three {
-    grid-column: 1 / 2;
-    grid-row: 3 / 5;
-}
-.us-four {
-    grid-column: 2 / 3;
-    grid-row: 3 / 5;
-}
-
-.states {
-    stroke: #fff;
-    stroke-width:1px;
-}
-.states:hover{
-    opacity: .6;
-}
-
-.legendLinear text {
-    font-size: 12px;
-}
-
-.d3-tip-us {
-    line-height: 2;
-    padding: 10px;
-    background: rgba(43,43,43, 0.8);
-    color: #fff;
-    border-radius: 2px;
 }
 
 /* STATISTICS PAGE */
@@ -433,7 +321,7 @@ input[type=submit]:hover {
 div.tooltip {
     position: absolute;
     text-align: left;
-    width: 115px;
+    width: 135px;
     height: 35px;
     padding: 2px;
     font: 12px sans-serif;
@@ -541,6 +429,47 @@ div.tooltip.w:after {
 }
 
 /* Line chart*/
+#lineChartDiv {
+    width: 95%;
+    height: 520px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.line {
+    fill: none;
+    stroke: #6F257F;
+    stroke-width: 5px;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: #F1F3F3;
+    stroke: #6F257F;
+    stroke-width: 5px;
+}
+
+.hover-line {
+    stroke: #6F257F;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
 #line-chart a {
     float: left;
     color: rgb(92, 50, 50);

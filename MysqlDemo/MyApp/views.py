@@ -5,7 +5,7 @@ import json
 # Create your views here.
 
 def home(request):
-    return render(request,'home.html')
+    return render(request,'mywebsiteNew2.html')
 
 def showWorldData(request):
     context = {

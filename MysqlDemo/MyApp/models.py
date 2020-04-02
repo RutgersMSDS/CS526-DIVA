@@ -27,10 +27,8 @@ class WorldPopulation(models.Model):
     # x-axis  - time
     # y-axis - population count
 
-    
-
 class CountryAreaContinent(models.Model):
-    country_code = models.CharField(max_length = 5, primary_key=True)
+    country_code = models.CharField(max_length = 5)
     country_name = models.CharField(max_length = 50)
     country_area = models.BigIntegerField()
     continent_name = models.CharField(max_length=40)
