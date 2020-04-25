@@ -78,7 +78,7 @@ def getWorldPopulationNew():
     area.append({'name':'Oceania','area':temp['Oceania']})
     area.append({'name':'South America','area':temp['South America']})"""
 
-    wp['populationList']["world"] = population
+    wp['populationList']["World"] = population
     #wp['area'] = area
     with open('worldData.json', 'w') as json_file:
         json.dump(wp, json_file)
@@ -197,7 +197,7 @@ def getCountryPopulation(cn):
 
 
 def getCountryPopulationNew(cn):
-    print("Countries are {0}".format(cn[0]))
+    #print("Countries are {0}".format(cn[0]))
     no_of_countries = len(cn)
     print(no_of_countries)
     cp = {'populationList':{}}

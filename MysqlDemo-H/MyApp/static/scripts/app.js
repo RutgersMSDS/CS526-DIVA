@@ -42,15 +42,15 @@ $.ajax(
         }
     });
 
-    getChoroplethData();
+
 
     function getChoroplethData()
     {
-        
+
         $.ajax(
         {
            /* type: "POST",
-            data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here 
+            data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
             'year':choroplethSliderYear
             },*/
             url:"/showChoroplethData",
@@ -63,7 +63,7 @@ $.ajax(
                 //console.log(currentChoroplethData);
                 drawMap();
             }
-        }    
+        }
         );
     }
 
@@ -122,7 +122,7 @@ $.ajax(
                 /*.on('mousedown.log', function (d) {
                     //console.log(d);  // outputs data of country
                     //console.log(this); // outputs path of country
-                    
+
                     selectedCountryName = countryNameDict[d.id];
                     choroplethCountryName = getDatabaseCountryName(selectedCountryName);
                     currentColor = this.style.fill;
@@ -232,7 +232,7 @@ $.ajax(
                             break;
                         case 'Bahamas':
                             choroplethCountryName = 'Bahamas The';
-                            break; 
+                            break;
                         case 'W. Sahara':
                             choroplethCountryName = 'Western Sahara';
                             break;
@@ -241,15 +241,15 @@ $.ajax(
                             break;
                         case 'Solomon Is.':
                             choroplethCountryName = 'Solomon Islands';
-                            break;    
+                            break;
                     }
             return choroplethCountryName
     }
 
-    function initializeChoroplethSlider()
-    {
-        gChoroplethSlider = d3.select("#Choropleth_Slider")
-        choroplethSlider = d3
+function initializeChoroplethSlider()
+{
+    gChoroplethSlider = d3.select("#Choropleth_Slider")
+    choroplethSlider = d3
         .sliderHorizontal()
         .min(1950)
         .max(2050)
@@ -257,16 +257,16 @@ $.ajax(
         .width(400)
         .displayValue(true)
         .on('onchange', val => {
-        choroplethSliderYear = parseInt(val);
-        console.log(choroplethSliderYear)
-        //startIndex = startYear - 1950;
-        //getChoroplethData();
-        choroplethDataIndex = choroplethSliderYear - 1950;
-        currentChoroplethData = choroplethData[choroplethSliderYear];
-        updateChoroplpeth();
+            choroplethSliderYear = parseInt(val);
+            console.log(choroplethSliderYear)
+            //startIndex = startYear - 1950;
+            //getChoroplethData();
+            choroplethDataIndex = choroplethSliderYear - 1950;
+            currentChoroplethData = choroplethData[choroplethSliderYear];
+            updateChoroplpeth();
         });
-        gChoroplethSlider.call(choroplethSlider);
-    }
+    gChoroplethSlider.call(choroplethSlider);
+}
 
 function clickLineChart()
 {
@@ -431,6 +431,7 @@ function plotContinents(selectedContinentNames)
     blankSlate();
     wp = {};
     wpSliced = {};
+    selectedContinentNames = JSON.stringify(selectedContinentNames);
     $.ajax(
         {
             type: "POST",
@@ -503,3 +504,25 @@ function removeCountry(countryName) // removes country from selected list
     }
     console.log(selectedCountryNamesList)
 }
+
+function getChoroplethData()
+    {
+        $.ajax(
+            {
+                /* type: "POST",
+                 data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
+                 'year':choroplethSliderYear
+                 },*/
+                url:"/showChoroplethData",
+                success: function(result)
+                {
+                    choroplethData = JSON.parse(result).choroplethData;
+                    console.log(choroplethData);
+                    choroplethDataIndex = 0;
+                    currentChoroplethData = choroplethData[choroplethSliderYear];
+                    console.log(currentChoroplethData);
+                    drawMap();
+                }
+            }
+        );
+    }

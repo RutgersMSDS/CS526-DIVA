@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from MyApp import Q_PopulationGrowthTrends as qpgt
+from MyApp import MaleFemalePyramid as mfp
 import json
 
 # Create your views here.
@@ -41,6 +42,18 @@ def showCountryData(request):
         'cp' : qpgt.getCountryPopulationNew(countryNames)
     }
     return HttpResponse(json.dumps(context))
+
+def showChoroplethData(request):
+    #year = request.POST.get('year')
+    context = {
+        'choroplethData' : qpgt.getChoroplethData()
+    }
+    return HttpResponse(json.dumps(context))
+
+def getMaleData(request):
+    context = {
+        'maleData' : mfp.getMalePopulation()
+    }
 
 def barChart(request):
     return 'barChart.js'
