@@ -33,7 +33,7 @@ function drawMap()
         .append("svg")
         .attr("id", "map")
         .attr("border",1)
-        .style("background-color", "#4242e4")
+        .style("background-color", "#0600b8;")
         .attr("width",  width)
         .attr("height", outerHeight-2)
         .attr("transform", "translate(" +  margin.left + "," + 2 + ")");
@@ -50,8 +50,8 @@ function drawMap()
             .translateExtent([[-margin.left, -margin.top], [width, height]])
             .extent([[0, 0], [width, height]])
             .on('zoom' , () => {
-        gMap.attr("transform",d3.event.transform);
-    }));
+                gMap.attr("transform",d3.event.transform);
+            }));
 
     var projection = d3.geoNaturalEarth1();
     projection.translate([width / 2, height / 2])
@@ -124,7 +124,9 @@ function drawMap()
                     return(countryNameDict[d.id]+" : "+countryPopulation.toLocaleString())
                 })
         });
+
     initializeChoroplethSlider();
+    initializeChoroplethLegend(outerHeight)
 }
 
 function updateChoroplpeth()
@@ -225,7 +227,7 @@ function initializeChoroplethSlider()
     var width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
 
-     var svg = d3.select("#mapSliderDiv")
+    var svg = d3.select("#mapSliderDiv")
         .append("svg")
         .attr("id", "slider")
         .attr("border",1)
@@ -257,15 +259,86 @@ function initializeChoroplethSlider()
 function plotCountry(countryName, color)
 {
     $.ajax({
-            type: "POST",
-            data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
-                'country':countryName
-            },
-            url:"/showCountryData",
-            success: function(result)
-            {
-                var data = JSON.parse(result).cp.populationList;
-                drawLine(data, countryName, color);
-            }
-        });
+        type: "POST",
+        data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
+            'country':countryName
+        },
+        url:"/showCountryData",
+        success: function(result)
+        {
+            var data = JSON.parse(result).cp.populationList;
+            drawLine(data, countryName, color);
+        }
+    });
+}
+
+function linspace(start, end, n) {
+    var out = [];
+    var delta = (end - start) / (n - 1);
+
+    var i = 0;
+    while(i < (n - 1)) {
+        out.push(start + (i * delta));
+        i++;
+    }
+
+    out.push(end);
+    return out;
+}
+
+function initializeChoroplethLegend(height) {
+    // add the legend now
+    var legendFullHeight = height;
+    var legendFullWidth = 150;
+
+    var legendMargin = { top: 0, bottom: 20, left: 50, right: 20 };
+
+    // use same margins as main plot
+    var legendWidth = legendFullWidth - legendMargin.left - legendMargin.right -50;
+    var legendHeight = legendFullHeight;
+
+    var legendSvg = d3.select("#mapDiv")
+        .append('svg')
+        .attr("id", "chroplethLegendSVG")
+        .attr('width', legendFullWidth)
+        .attr('height', legendFullHeight)
+        .attr('transform', 'translate(0,' + legendMargin.top + ')')
+        .append('g')
+        .attr('transform', 'translate(' + 0 + ',' + legendMargin.top + ')');
+
+    // create a scale and axis for the legend
+    const logScale = d3.scaleLog()
+        .domain([10000, 1000000000]);
+    const colorScaleLog = d3.scaleSequential(
+        (d) => d3.interpolateYlGn(logScale(d))
+    );
+
+    // create a scale and axis for the legend
+    var legendAxis = d3.axisRight(colorScaleLog)
+        .ticks(9, "d")
+        .tickValues([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]);
+
+    legendSvg.append("g")
+        .attr('class', 'scale-log')
+        .attr('transform', 'translate(0, 0)')
+        .selectAll('bars').data([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]).enter()
+        .append('rect')
+        .attr('y', (d, i) => i * 1.15 * legendWidth + 10)
+        .attr('x', legendWidth)
+        .attr('width', 50)
+        .attr('height', 30)
+        .attr('fill', colorScaleLog);
+    legendSvg.append("g")
+        .attr('class', 'scale-log')
+        .attr('transform', 'translate(0, 0)')
+        .selectAll('bars').data([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]).enter()
+        .append('text')
+        .text(d => d)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', '12px')
+        .attr('y', (d, i) => i* 1.15 * legendWidth + 35)
+        .attr('x', legendWidth + 50)
+        .attr('width', 100)
+        .attr('height', 35)
+        .attr('fill', "white")
 }

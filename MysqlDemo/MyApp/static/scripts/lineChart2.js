@@ -224,7 +224,7 @@ function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div	.html("<b>Year: </b>" + formatYear(d.year) + "<br/><b>Population: </b>" + (d.population/1000000).toFixed(2) + "M")
+                div.html("<b>Year: </b>" + formatYear(d.year) + "<br/><b>Population: </b><br/><b>Population: </b>" + (d.population/1000000).toFixed(2) + "M")
                     .style("left", (d3.event.pageX - margin.left - 67) + "px")
                     .style("top", (d3.event.pageY - margin.top - margin.bottom - 70) + "px");
             })

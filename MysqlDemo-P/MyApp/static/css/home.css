@@ -3,16 +3,24 @@
 }
 
 .sphere {
-    fill: #4242e4;
+    fill: #0600b8;
 }
 
+#mapDiv {
+    width: 80%;
+    height: 85%;
+    left: 2.5%;
+    top: 0%;
+    margin:auto;
+    background-color: #0600b8;
+}
 .country {
 
     stroke: black;
     stroke-opacity: 0.1;
 }
 
-.center-container {
+.container {
     text-align-last: center;
     max-width: 1200px !important;
 }

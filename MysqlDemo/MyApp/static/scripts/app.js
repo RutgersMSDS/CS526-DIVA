@@ -66,11 +66,12 @@ function drawMap()
             .on('mousedown.log', function (d) {
                 //console.log(d);  // outputs data of country
                 //console.log(this); // outputs path of country
-                selectedCountryName = countryNameDict[d.id]
+                selectedCountryName = countryNameDict[d.id];
                 currentColor = this.style.fill;
                 (currentColor=='white')?(addCountry(selectedCountryName)):(removeCountry(selectedCountryName));
                 newColor = (currentColor=='white')?'red':'white';
                 d3.select(this).style('fill',newColor);
+                currentPlotDepth = "Countries";
                 plotCountries();
                 //console.log(selectedCountryNamesList);
             })
@@ -290,7 +291,7 @@ function plotCountries()
                 console.log(wp)
                 sliceWp();
                 //drawLine(wp.slice(startIndex,endIndex+1),"svg","xAxis","yAxis","plot")
-                currentPlotDepth = "Countries";
+
                 showChart(chartName);
             }
         });
