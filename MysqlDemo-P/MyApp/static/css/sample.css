@@ -1,5 +1,5 @@
 .header {
-    overflow: hidden;
+    overflow: visible;
     background-color: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);;
     padding: 5px 5px;
 }
@@ -439,9 +439,13 @@ div.tooltip.w:after {
 /* Line chart*/
 #lineChartDiv {
     width: 95%;
-    height: 520px;
+    height: 95%;
     margin-left: 2.5%;
     margin-right: 2.5%;
+}
+
+.container.fertility_continents {
+    mtop:25%;
 }
 
 .axis {

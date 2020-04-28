@@ -9,8 +9,6 @@
     stroke-width: 0.5px;
 }
 
-
-
 .PathLine{
 
     fill:none;
@@ -29,7 +27,7 @@
 
 /* Style the tab */
 .tab {
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }

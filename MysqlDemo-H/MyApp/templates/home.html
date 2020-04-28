@@ -14,18 +14,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     {% load static %}
+    <script type="text/javascript" src="{%  static 'scripts/pyramidChart.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'scripts/choroplethNew.js' %}"></script>
     <script type="text/javascript" src="{%  static 'scripts/app.js' %}"></script>
     <script type="text/javascript" src="{%  static 'scripts/bubble.js' %}"></script>
     <script type="text/javascript" src="{%  static 'scripts/lineChart2.js' %}"></script>
-
+    <script type="text/javascript" src="{%  static 'scripts/barChartNew.js' %}"></script>
 
     <style>
         .sphere {
             fill: #4242e4;
         }
-
+        
         .country {
-
+        
             stroke: black;
             stroke-opacity: 0.1;
         }
@@ -153,7 +155,7 @@
                                         <div id="lineChartDiv">
                                             <svg id="line_bar_scatter">
                                                 <rect id="chartRect" style="fill:none; stroke:black; stroke-width:5; opacity:0.5"></rect>
-                                                <g id="container">
+                                                <g id="gcontainer">
                                                     <text id="xAxisText">Year</text>
                                                     <g id="xAxis"></g>
 
@@ -203,7 +205,7 @@
                                             <div id="choroplethDiv" style="flex: 0 0 50%;">
                                                 <svg id="map" width="100%" height="100%">
                                                     <g id="gMap">
-
+                                                        <rect style="fill:yellow"></rect>
                                                     </g>
                                                     <g id="Choropleth_Slider" style="left:50px">
                                                         

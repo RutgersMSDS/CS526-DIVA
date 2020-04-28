@@ -94,7 +94,30 @@ class MortalityLifeExpectancy(models.Model):
     # User has to make a choice of country
     # Mortality rate under 5 as a stacked bar chart.
 
+class MidyearPopulationAgeSexNew(models.Model):
+    country_code = models.CharField(max_length=5)
+    country_name = models.CharField(max_length = 50)
+    year = models.IntegerField()
+    sex = models.CharField(max_length=10)
+    age = models.IntegerField()
+    population = models.BigIntegerField()
+    class Meta:
+        db_table = 'midyear_population_age_sex_New'
 
+class CountryGenderSimilarity(models.Model):
+    country_name = models.CharField(max_length=40)
+    year = models.IntegerField()
+    distance = models.FloatField()
+    class Meta:
+        db_table = 'country_gender_similarity'
+        
+class CountryAgeSexRatio(models.Model):
+    country_name = models.CharField(max_length = 50)
+    year = models.IntegerField()
+    age = models.IntegerField()
+    ratio = models.FloatField()
+    class Meta:
+        db_table = 'country_age_sex_ratio'
 
 class MidyearPopulationAgeSex(models.Model):
     country_code = models.CharField(max_length=5)

@@ -1,18 +1,23 @@
-<html>
-    <head>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-        {% load static %}
-        <script type="text/javascript" src="{%  static 'scripts/pyramidChart.js' %}"></script>
-        <script type="text/javascript" src="{%  static 'scripts/barChart2.js' %}"></script>
-    </head>
-    <body>
-        <div id="pyramidDiv" style="width:1400px ; height:600px">
 
+<div id="pyramidDiv" style="width:1400px ; height:650px"></div>
+<div id="pyramidChoroplethDiv" style="width:700px; height:500px">
+    <div  id="world-map">
+        <div class="content-text">
+            Country level (select at most 10 countries)
         </div>
-    </body>
-</html>
-<script>
+        <div id="choroplethDiv" class ="genderRatio" style="flex: 0 0 50%;">
+            <svg id="map" width="100%" height="100%">
+                <rect style="fill:none; stroke:black ; stroke-width:1" width="600" height="400"></rect>
+                <g id="gMap" width="600px" height="300px">
 
-    drawBar();
+                </g>
+                <g id="Choropleth_Year_Slider" style="left:50px">
 
-</script>
+                </g>
+                <g id="Choropleth_Age_Slider" style="left:50px" transform="translate(0,50)">
+
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>

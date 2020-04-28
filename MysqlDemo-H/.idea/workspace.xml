@@ -1,39 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f9d9c321-3c3c-47c6-a34c-35017a70a9a9" name="Default Changelist" comment="Adding the final integrated proj">
-      <change afterPath="$PROJECT_DIR$/MyApp/static/img/logo.jpg" afterDir="false" />
+    <list default="true" id="13a975e4-7b5b-499c-b233-a212464f95bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../MainProject/.idea/MainProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/.idea/dictionaries/harshinibonam.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/FindCountryGenderSimilarity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/Q_FertilityTrends.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/Q_Mortality.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/ChordChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/SpiralChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/barChartNew2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/d3-tip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/fertility.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/mortality.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/populationTrends.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/pyramidChoropleth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/Fertility.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MysqlDemo/.idea/MysqlDemo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultipleContinents.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MultipleCountries.json" beforeDir="false" afterPath="$PROJECT_DIR$/MultipleCountries.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/Q_PopulationGrowthTrends.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/Q_PopulationGrowthTrends.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/migrations/0002_delete_midyear_population.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp/static/css/new.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/static/css/sample.css" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/static/css/sample.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/static/scripts/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/static/scripts/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/static/scripts/barChart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/static/scripts/bubble.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/static/scripts/bubble.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/static/scripts/choropleth.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/static/scripts/choropleth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/static/scripts/lineChart2.js" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/static/scripts/lineChart2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyApp/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyApp/views/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyApp/views/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldData.json" beforeDir="false" afterPath="$PROJECT_DIR$/worldData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/mywebsiteNew2.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/mywebsiteNew2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MysqlDemo/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MysqlDemo/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MysqlDemo/MyApp/static/scripts/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo/MyApp/static/scripts/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MysqlDemo/MyApp/static/scripts/lineChart2.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo/MyApp/static/scripts/lineChart2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/Presentation1.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../resources/Presentation1.pptx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/sample_input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../resources/world_pop.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/FemaleData.json" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/FemaleData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MultipleContinents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MultipleContinents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MultipleCountries.json" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MultipleCountries.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/Q_PopulationGrowthTrends.py" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/Q_PopulationGrowthTrends.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/new.css" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/new.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/sample.css" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/css/sample.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/barChartNew.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/barChartNew.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/choroplethNew.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/choroplethNew.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/continents.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/lineChart3.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/static/scripts/lineChart3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/PopulationTrends.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/PopulationTrends.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/pyramidChart.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/templates/pyramidChart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/views/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../MysqlDemo-P/MyApp/views/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_age_specific_fertility_rates.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_group.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_group_permissions.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_permission.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_user.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_user_groups.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_auth_user_user_permissions.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_birth_death_growth_rates.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_continent_population.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_country_area_continent.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_country_population.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_django_admin_log.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_django_content_type.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_django_migrations.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_django_session.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_midyear_population.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_midyear_population_age_sex.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_mortality_life_expectancy.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resources/Dump20200402/mydatabase_world_population.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
-    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1Zznhg9AkiQf4Wcb5efMeMcjuAM" />
+  <component name="ProjectId" id="1b87T9bNsVzYeQ4pR6y7sOrX1iI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,13 +91,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/MyApp/static" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/MyApp/static" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="MysqlDemo-H" type="Python.DjangoServer" factoryName="Django server">
@@ -57,7 +101,6 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="MysqlDemo.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -81,113 +124,37 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f9d9c321-3c3c-47c6-a34c-35017a70a9a9" name="Default Changelist" comment="" />
-      <created>1585850910052</created>
+      <changelist id="13a975e4-7b5b-499c-b233-a212464f95bc" name="Default Changelist" comment="" />
+      <created>1588001871478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1585850910052</updated>
-      <workItem from="1585850911405" duration="2816000" />
-      <workItem from="1585854278405" duration="4550000" />
-      <workItem from="1586806707880" duration="1636000" />
-      <workItem from="1586810870149" duration="1368000" />
+      <updated>1588001871478</updated>
+      <workItem from="1588001872761" duration="1774000" />
     </task>
-    <task id="LOCAL-00001" summary="Adding the final integrated proj">
-      <created>1585851357581</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1585851357581</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Adding the final integrated proj">
-      <created>1585851396376</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1585851396376</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adding the final integrated proj" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding the final integrated proj" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="23" width="1680" height="947" key="CommitChangelistDialog2" timestamp="1586811068921">
-      <screen x="0" y="23" width="1680" height="947" />
-    </state>
-    <state x="415" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1585851395902" />
-    <state x="0" y="23" width="1680" height="947" key="CommitChangelistDialog2/0.23.1680.947@0.23.1680.947" timestamp="1586811068921" />
-    <state width="1638" height="363" key="GridCell.Tab.0.bottom" timestamp="1585920600933">
+    <state x="440" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588002109098">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600933" />
-    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.23.1680.947@0.23.1680.947" timestamp="1585854252839" />
-    <state width="1638" height="363" key="GridCell.Tab.0.center" timestamp="1585920600932">
+    <state x="440" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1588002109098" />
+    <state x="404" y="127" key="CommitChangelistDialog2" timestamp="1588001927141">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600932" />
-    <state width="1638" height="363" key="GridCell.Tab.0.center/0.23.1680.947@0.23.1680.947" timestamp="1585854252838" />
-    <state width="1638" height="363" key="GridCell.Tab.0.left" timestamp="1585920600931">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600931" />
-    <state width="1638" height="363" key="GridCell.Tab.0.left/0.23.1680.947@0.23.1680.947" timestamp="1585854252837" />
-    <state width="1638" height="363" key="GridCell.Tab.0.right" timestamp="1585920600932">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600932" />
-    <state width="1638" height="363" key="GridCell.Tab.0.right/0.23.1680.947@0.23.1680.947" timestamp="1585854252838" />
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1585920600934">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600934" />
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.23.1680.947@0.23.1680.947" timestamp="1585854252841" />
-    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1585920600934">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600934" />
-    <state width="1638" height="363" key="GridCell.Tab.1.center/0.23.1680.947@0.23.1680.947" timestamp="1585854252840" />
-    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1585920600933">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600933" />
-    <state width="1638" height="363" key="GridCell.Tab.1.left/0.23.1680.947@0.23.1680.947" timestamp="1585854252840" />
-    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1585920600934">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1585920600934" />
-    <state width="1638" height="363" key="GridCell.Tab.1.right/0.23.1680.947@0.23.1680.947" timestamp="1585854252841" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1585851405424">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1585851405424" />
-    <state x="100" y="123" width="1480" height="747" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1586807990280">
-      <screen x="0" y="23" width="1680" height="947" />
-    </state>
-    <state x="100" y="123" width="1480" height="747" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1680.947@0.23.1680.947" timestamp="1586807990280" />
-    <state x="585" y="265" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1585851391866">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="585" y="265" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1585851391866" />
-    <state x="498" y="277" width="837" height="550" key="find.popup" timestamp="1586808081273">
-      <screen x="0" y="23" width="1680" height="947" />
-    </state>
-    <state x="498" y="282" width="837" height="550" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1585862746069" />
-    <state x="498" y="277" width="837" height="550" key="find.popup/0.23.1680.947@0.23.1680.947" timestamp="1586808081273" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MyApp/views.py</url>
-          <line>24</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="404" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1588001927141" />
   </component>
 </project>

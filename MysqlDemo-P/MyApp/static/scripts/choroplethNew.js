@@ -1,26 +1,22 @@
-
-var choroplethData; // all years
-var choroplethDataIndex;
-var currentChoroplethData; // current year
 const countryNameDict = {};
+let jsonData = {};
 
-function getChoroplethData(choroplethSliderYear)
-{
-    $.ajax({
-        url:"/showChoroplethData",
-        success: function(result)
-        {
-            choroplethData = JSON.parse(result).choroplethData;
-            choroplethDataIndex = 0;
-            currentChoroplethData = choroplethData[choroplethSliderYear];
-            drawMap();
-        }
+Promise.all([
+    d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/110m.tsv'),
+    d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json')])
+    .then(([tsvData, jsonData1]) => {
+        tsvData.forEach(d => {
+            jsonData = jsonData1;
+            countryNameDict[d.iso_n3] = d.name;
+        });
     });
-}
 
-function drawMap()
-{
-    mapDiv = document.getElementById("mapDiv");
+function drawMap(obj, onClickCountry, onUnClickCountry) {
+    var  mapDivName = obj.mapDivName,
+        mapSliderDivName = obj.mapSliderName,
+        fillKey = obj.fillKey;
+
+    mapDiv = document.getElementById(mapDivName);
 
     var outerWidth  = mapDiv.clientWidth,
         outerHeight = mapDiv.clientHeight;
@@ -28,10 +24,11 @@ function drawMap()
     var margin = {top: 50, right: 100, bottom: 50, left: 100};
     var width = outerWidth - margin.left - margin.right,
         height = outerHeight - margin.top - margin.bottom;
+    obj.height = height;
 
-    var svg = d3.select("#mapDiv")
+    var svg = d3.select("#" + mapDivName)
         .append("svg")
-        .attr("id", "map")
+        .attr("id", "svg" + mapDivName)
         .attr("border",1)
         .style("background-color", "#0600b8;")
         .attr("width",  width)
@@ -44,7 +41,7 @@ function drawMap()
         .attr("height", height)
         .attr("transform", "translate(" +  0 + "," + margin.top + ")");
 
-    d3.select('#map').call(
+    d3.select('#svg' + mapDivName).call(
         d3.zoom()
             .scaleExtent([1, 8])
             .translateExtent([[-margin.left, -margin.top], [width, height]])
@@ -62,98 +59,103 @@ function drawMap()
     var tooltip = d3.select("body")
         .append("div")
         .attr("class", "tooltip")
-        .attr("id", "mapToolTip")
+        .attr("id", "mapToolTip" + mapDivName)
         .style("opacity", 0);
 
-    d3.select(".sphere").remove();
-    d3.selectAll(".country").remove();
+    d3.select(".sphere." + mapDivName).remove();
+    d3.selectAll(".country." + mapDivName).remove();
 
     gMap.append('path')
-        .attr('class', 'sphere')
+        .attr('class', 'sphere ' + mapDivName)
         .attr('d', pathGenerator({type: 'Sphere'}));
 
-    Promise.all([
-        d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/110m.tsv'),
-        d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json')
-    ])
-        .then(([tsvData,jsonData]) => {
-            tsvData.forEach(d => {
-                countryNameDict[d.iso_n3] = d.name;
-            });
+    var countries = topojson.feature(jsonData, jsonData.objects.countries);
+    gMap.selectAll('path')
+        .data(countries.features)
+        .enter().append('path')
+        .attr('class', 'country ' + mapDivName)
+        .attr('d', pathGenerator)
+        .attr('stroke', 'white')
+        .attr('stroke-width', '1px')
+        .style('fill',function(d){
+            var selectedCountryName = countryNameDict[d.id];
+            var fillKey = getDatabaseCountryName(selectedCountryName);
 
-            var countries = topojson.feature(jsonData, jsonData.objects.countries);
-            gMap.selectAll('path')
-                .data(countries.features)
-                .enter().append('path')
-                .attr('class', 'country')
-                .attr('d', pathGenerator)
-                .style('fill',function(d){
-                    selectedCountryName = countryNameDict[d.id];
-                    var choroplethCountryName = getDatabaseCountryName(selectedCountryName);
-                    d.population = currentChoroplethData[choroplethCountryName];
-                    if(d.population==undefined) {d.population=0;}
-                    return colorScale(d.population);
-                })
-                .on('mousedown.log', function (d) {
-                    var selectedCountryName = countryNameDict[d.id];
-                    var choroplethCountryName = getDatabaseCountryName(selectedCountryName);
-                    if(!selectedCountryNamesList.includes(selectedCountryName)
-                        && (selectedCountryNamesList.length) < 10) {
+            return obj.colorScale(fillKey);
+        })
+        .on('mousedown.log', function (d) {
+            var selectedCountryName = countryNameDict[d.id];
+            var choroplethCountryName = getDatabaseCountryName(selectedCountryName);
 
-                        selectedCountryNamesList.push(selectedCountryName);
-                        var newColor = tenCountryColors[(countryColorIndex ++)%10];
+            if(!obj.selectedCountryNamesList.includes(selectedCountryName)
+                && (obj.selectedCountryNamesList.length) < 10) {
 
-                        d3.select(this).style('fill', newColor);
-                        plotCountry(selectedCountryName, newColor);
+                var col = obj.countryColorIndex;
+                var newColor = obj.tenCountryColors[col];
+                obj.countryColorIndex = col + 1;
 
-                    } else if(selectedCountryNamesList.includes(selectedCountryName)) {
-                        //previously clicked, now deselected
-                        removeLine(selectedCountryName);
+                d3.select(this).style('fill', newColor);
+                onClickCountry(selectedCountryName, newColor);
 
-                        var newColor = colorScale(currentChoroplethData[choroplethCountryName]);
-                        d3.select(this).style('fill',newColor);
+            } else if(obj.selectedCountryNamesList.includes(selectedCountryName)) {
+                obj.deletePlace = selectedCountryName;
+                onUnClickCountry(obj);
 
-                    } else if(selectedCountryNamesList.length == 10) {
-                        //show toast of max 10
-                    }
-                })
-                .append('title')
-                .attr('class','countryName')
-                .text(function(d){
-                    var countryPopulation = d.population;
-                    return(countryNameDict[d.id]+" : "+countryPopulation.toLocaleString())
-                })
+                var newColor = obj.colorScale(choroplethCountryName);
+                d3.select(this).style('fill',newColor);
+
+            } else if(obj.selectedCountryNamesList.length === 10) {
+                alert("Max selection 10 exceeded.");
+            }
+        })
+        .append('title')
+        .attr('class','countryName ' + mapDivName)
+        .text(function(d){
+            var selectedCountryName = countryNameDict[d.id];
+            var fillKey = getDatabaseCountryName(selectedCountryName);
+            var text = obj.currentChoroplethData[fillKey];
+            if(text === undefined) {
+                text = "No data";
+            }
+            return(countryNameDict[d.id]+" : " + text)
         });
 
-    initializeChoroplethSlider();
-    initializeChoroplethLegend(outerHeight)
+    initializeChoroplethSlider(obj, mapSliderDivName);
+    initializeChoroplethLegend(obj, mapDivName);
+    var screenText = document.getElementById("choroplethYear");
+    if(screenText !== undefined && screenText !== null) {
+        screenText.innerHTML = parseInt(obj.choroplethSliderYear);
+    }
 }
 
-function updateChoroplpeth()
-{
-    d3.selectAll(".country")
+function updateChoropleth(obj) {
+    d3.selectAll(".country."  + obj.mapDivName)
         .style("fill" , function(d){
-            //console.log(d.id);
-            currentColor = this.style.fill;
-            selectedCountryName = countryNameDict[d.id];
-            console.log(selectedCountryName)
-            choroplethCountryName = getDatabaseCountryName(selectedCountryName);
-            d.population = currentChoroplethData[choroplethCountryName];
-            if(d.population==undefined) {d.population=0;}
-            newColor = (currentColor=='red')?'red':colorScale(d.population);
+            var currentColor = this.style.fill;
+            var newColor;
+            var selectedCountryName = countryNameDict[d.id],
+                choroplethCountryName = getDatabaseCountryName(selectedCountryName);
+
+            if(obj.tenCountryColors.includes(currentColor)) {
+                newColor = currentColor;
+            } else {
+                newColor = obj.colorScale(choroplethCountryName);
+            }
             return newColor;
         })
-        .select(".countryName")
+        .select(".countryName." + obj.mapDivName)
         .text(function(d){
-            var countryPopulation = d.population;
-            //console.log(pop)
-            return(countryNameDict[d.id]+" : "+countryPopulation.toLocaleString())
-        })
-    //.text(d=>countryNameDict[d.id]+" : "+d.population)
+            var selectedCountryName = countryNameDict[d.id];
+            var fillKey = getDatabaseCountryName(selectedCountryName);
+            var text = obj.currentChoroplethData[fillKey];
+            if(text === undefined) {
+                text = "No data";
+            }
+            return(countryNameDict[d.id]+" : " + text)
+        });
 }
 
-function getDatabaseCountryName(choroplethCountryName)
-{
+function getDatabaseCountryName(choroplethCountryName) {
     switch(choroplethCountryName)
     {
         case 'Myanmar':
@@ -217,128 +219,115 @@ function getDatabaseCountryName(choroplethCountryName)
     return choroplethCountryName
 }
 
-function initializeChoroplethSlider()
-{
-    var sliderDiv = document.getElementById("mapSliderDiv");
-    var outerWidth  = sliderDiv.clientWidth,
-        outerHeight = sliderDiv.clientHeight;
+function initializeChoroplethSlider(obj, mapSliderDivName) {
+    if(obj.showChoroplethSlider === true) {
+        var sliderDiv = document.getElementById(mapSliderDivName);
+        var outerWidth  = sliderDiv.clientWidth,
+            outerHeight = sliderDiv.clientHeight;
 
-    var margin = {top: 5, right: 100, bottom: 10, left: 100};
-    var width = outerWidth - margin.left - margin.right,
-        height = outerHeight - margin.top - margin.bottom;
+        var margin = {top: 5, right: 100, bottom: 10, left: 100};
+        var width = outerWidth - margin.left - margin.right,
+            height = outerHeight - margin.top - margin.bottom;
 
-    var svg = d3.select("#mapSliderDiv")
-        .append("svg")
-        .attr("id", "slider")
-        .attr("border",1)
-        .attr("width",  outerWidth)
-        .attr("height", outerHeight);
+        var svg = d3.select("#" + mapSliderDivName)
+            .append("svg")
+            .attr("id", "slider")
+            .attr("border",1)
+            .attr("width",  outerWidth)
+            .attr("height", outerHeight);
 
-    var gChoroplethSlider = svg.append("g")
-        .attr("id","sliderCanvas")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("transform", "translate(" + margin.left + "," + height/2 + ")");
+        var gChoroplethSlider = svg.append("g")
+            .attr("id","sliderCanvas"+mapSliderDivName)
+            .attr("width", width)
+            .attr("height", height)
+            .attr("transform", "translate(" + margin.left + "," + (height/2 - 10) + ")");
 
-    var choroplethSlider = d3.sliderHorizontal()
-        .min(1950)
-        .max(2050)
-        .step(1)
-        .width(width)
-        .displayValue(true)
-        .on('onchange', val => {
-            choroplethSliderYear = parseInt(val);
-            choroplethDataIndex = choroplethSliderYear - 1950;
-            currentChoroplethData = choroplethData[choroplethSliderYear];
-            updateChoroplpeth(choroplethSliderYear);
-        });
-    gChoroplethSlider.call(choroplethSlider);
-    d3.select("path.handle").attr("fill", "#4242e4")
-}
+        var choroplethSlider = d3.sliderHorizontal()
+            .min(1950)
+            .max(2050)
+            .step(1)
+            .default(obj.choroplethSliderYear)
+            .width(width)
+            .displayValue(true)
+            .on('onchange', val => {
+                var screenText = document.getElementById("choroplethYear");
+                if(screenText !== undefined && screenText !== null) {
+                    screenText.innerHTML = parseInt(val);
+                }
+                obj.choroplethSliderYear = parseInt(val);
+                obj.choroplethDataIndex = obj.choroplethSliderYear - 1950;
+                obj.currentChoroplethData = obj.choroplethData[obj.choroplethSliderYear];
+                updateChoropleth(obj);
+                if(obj.updateLegendTicks === true) {
+                    obj.updateLegend();
 
-function plotCountry(countryName, color)
-{
-    $.ajax({
-        type: "POST",
-        data: { csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
-            'country':countryName
-        },
-        url:"/showCountryData",
-        success: function(result)
-        {
-            var data = JSON.parse(result).cp.populationList;
-            drawLine(data, countryName, color);
-        }
-    });
-}
+                    d3.select("#"+obj.mapDivName + 'scale-log-text')
+                        .selectAll('text').remove();
 
-function linspace(start, end, n) {
-    var out = [];
-    var delta = (end - start) / (n - 1);
-
-    var i = 0;
-    while(i < (n - 1)) {
-        out.push(start + (i * delta));
-        i++;
+                    d3.select("#"+obj.mapDivName + 'scale-log-text')
+                        .selectAll('bars').data(obj.mapLegendTicks).enter()
+                        .append('text')
+                        .text(d => d)
+                        .attr('font-family', 'sans-serif')
+                        .attr('font-size', '12px')
+                        .attr('y', (d, i) => (i * 0.8) * obj.legendWidth + 12)
+                        .attr('x', (d, i) => obj.legendWidth )
+                        .attr('width', 100)
+                        .attr('height', 20)
+                        .attr('fill', "white")
+                }
+            });
+        gChoroplethSlider.call(choroplethSlider);
+        d3.select("path.handle").attr("fill", "#4242e4")
     }
-
-    out.push(end);
-    return out;
 }
 
-function initializeChoroplethLegend(height) {
-    // add the legend now
-    var legendFullHeight = height;
-    var legendFullWidth = 150;
+function initializeChoroplethLegend(obj, mapDivName) {
+    if(obj.showChoroplethLegend === true) {
+        // add the legend now
+        var legendFullHeight = obj.height;
+        var legendFullWidth = 150;
 
-    var legendMargin = { top: 0, bottom: 20, left: 50, right: 20 };
+        var legendMargin = {top: 0, bottom: 20, left: 50, right: 20};
 
-    // use same margins as main plot
-    var legendWidth = legendFullWidth - legendMargin.left - legendMargin.right -50;
-    var legendHeight = legendFullHeight;
+        // use same margins as main plot
+        var legendWidth = legendFullWidth - legendMargin.left - legendMargin.right - 30;
 
-    var legendSvg = d3.select("#mapDiv")
-        .append('svg')
-        .attr("id", "chroplethLegendSVG")
-        .attr('width', legendFullWidth)
-        .attr('height', legendFullHeight)
-        .attr('transform', 'translate(0,' + legendMargin.top + ')')
-        .append('g')
-        .attr('transform', 'translate(' + 0 + ',' + legendMargin.top + ')');
+        var legendSvg = d3.select("#" + mapDivName)
+            .append('svg')
+            .attr("id", "chroplethLegendSVG" + mapDivName)
+            .attr('width', legendFullWidth)
+            .attr('height', legendFullHeight)
+            .attr('transform', 'translate(0,' + legendMargin.top + ')')
+            .append('g')
+            .attr('transform', 'translate(' + 0 + ',' + legendMargin.top + ')');
 
-    // create a scale and axis for the legend
-    const logScale = d3.scaleLog()
-        .domain([10000, 1000000000]);
-    const colorScaleLog = d3.scaleSequential(
-        (d) => d3.interpolateYlGn(logScale(d))
-    );
 
-    // create a scale and axis for the legend
-    var legendAxis = d3.axisRight(colorScaleLog)
-        .ticks(9, "d")
-        .tickValues([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]);
+        legendSvg.append("g")
+            .attr('class', 'scale-log-color')
+            .attr('transform', 'translate(0, 0)')
+            .selectAll('text').data(obj.mapDomain).enter()
+            .append('rect')
+            .attr('y', (d, i) => (i * 0.8)* legendWidth + 30)
+            .attr('x', (d, i) => legendWidth - 50)
+            .attr('width', 50)
+            .attr('height', 30)
+            .attr('fill', (d, i) => obj.mapColors[i]);
 
-    legendSvg.append("g")
-        .attr('class', 'scale-log')
-        .attr('transform', 'translate(0, 0)')
-        .selectAll('bars').data([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]).enter()
-        .append('rect')
-        .attr('y', (d, i) => i * 1.15 * legendWidth + 10)
-        .attr('x', legendWidth)
-        .attr('width', 50)
-        .attr('height', 30)
-        .attr('fill', colorScaleLog);
-    legendSvg.append("g")
-        .attr('class', 'scale-log')
-        .attr('transform', 'translate(0, 0)')
-        .selectAll('bars').data([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000]).enter()
-        .append('text')
-        .text(d => d)
-        .attr('font-family', 'sans-serif')
-        .attr('font-size', '12px')
-        .attr('y', (d, i) => i* 1.15 * legendWidth + 35)
-        .attr('x', legendWidth + 50)
-        .attr('width', 100)
-        .attr('height', 35)
-        .attr('fill', "white")
+        legendSvg.append("g")
+            .attr('id', obj.mapDivName + 'scale-log-text')
+            .attr('transform', 'translate(0, 0)')
+            .selectAll('bars').data(obj.mapLegendTicks).enter()
+            .append('text')
+            .text(d => d)
+            .attr('font-family', 'sans-serif')
+            .attr('font-size', '12px')
+            .attr('y', (d, i) => (i * 0.8) * legendWidth + 12)
+            .attr('x', (d, i) => legendWidth )
+            .attr('width', 100)
+            .attr('height', 20)
+            .attr('fill', "white");
+
+        obj.legendWidth = legendWidth;
+    }
 }

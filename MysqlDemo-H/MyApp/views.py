@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from MyApp import Q_PopulationGrowthTrends as qpgt
+from MyApp import MaleFemalePyramid as mfp
 import json
 
 # Create your views here.
@@ -25,7 +26,7 @@ def showContinentData(request):
     continentNames = request.POST.get('continents')
     #continentNames = ['Asia','Africa']
     continentNames = json.loads(continentNames)  # reverts the stringification of json
-    print(continentNames)
+    #print(continentNames)
     context = {
         'cp' : qpgt.getContinentPopulationsNew(continentNames)
         #'cp':continentName
@@ -48,6 +49,11 @@ def showChoroplethData(request):
         'choroplethData' : qpgt.getChoroplethData()
     }
     return HttpResponse(json.dumps(context))
+
+def getMaleData(request):
+    context = {
+        'maleData' : mfp.getMalePopulation()
+    }
 
 def barChart(request):
     return 'barChart.js'

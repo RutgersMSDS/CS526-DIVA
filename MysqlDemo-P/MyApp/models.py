@@ -15,17 +15,58 @@ class ContinentPopulation(models.Model):
     continent_name = models.CharField(max_length=40)
     year = models.IntegerField()
     population = models.BigIntegerField()
+    fertility_rate_15_19 = models.FloatField()
+    fertility_rate_20_24 = models.FloatField()
+    fertility_rate_25_29 = models.FloatField()
+    fertility_rate_30_34 = models.FloatField()
+    fertility_rate_35_39 = models.FloatField()
+    fertility_rate_40_44 = models.FloatField()
+    fertility_rate_45_49 = models.FloatField()
+    total_fertility_rate = models.FloatField()
+    gross_reproduction_rate = models.FloatField()
+    sex_ratio_at_birth = models.FloatField()
+    infant_mortality = models.FloatField()
+    infant_mortality_male = models.FloatField()
+    infant_mortality_female = models.FloatField()
+    life_expectancy = models.FloatField()
+    life_expectancy_male = models.FloatField()
+    life_expectancy_female = models.FloatField()
+    mortality_rate_under_5 = models.FloatField()
+    mortality_rate_under_5_male = models.FloatField()
+    mortality_rate_under_5_female = models.FloatField()
+    mortality_rate_1_to_4 = models.FloatField()
+    mortality_rate_1_to_4_male = models.FloatField()
+    mortality_rate_1_to_4_female = models.FloatField()
     class Meta:
         db_table = 'continent_population'
 
 class WorldPopulation(models.Model):
     year = models.IntegerField(primary_key=True)
     population = models.BigIntegerField()
+    fertility_rate_15_19 = models.FloatField()
+    fertility_rate_20_24 = models.FloatField()
+    fertility_rate_25_29 = models.FloatField()
+    fertility_rate_30_34 = models.FloatField()
+    fertility_rate_35_39 = models.FloatField()
+    fertility_rate_40_44 = models.FloatField()
+    fertility_rate_45_49 = models.FloatField()
+    total_fertility_rate = models.FloatField()
+    gross_reproduction_rate = models.FloatField()
+    sex_ratio_at_birth = models.FloatField()
+    infant_mortality = models.FloatField()
+    infant_mortality_male = models.FloatField()
+    infant_mortality_female = models.FloatField()
+    life_expectancy = models.FloatField()
+    life_expectancy_male = models.FloatField()
+    life_expectancy_female = models.FloatField()
+    mortality_rate_under_5 = models.FloatField()
+    mortality_rate_under_5_male = models.FloatField()
+    mortality_rate_under_5_female = models.FloatField()
+    mortality_rate_1_to_4 = models.FloatField()
+    mortality_rate_1_to_4_male = models.FloatField()
+    mortality_rate_1_to_4_female = models.FloatField()
     class Meta:
         db_table = 'world_population'
-    # World population trend will be shown for the first time
-    # x-axis  - time
-    # y-axis - population count
 
 class CountryAreaContinent(models.Model):
     country_code = models.CharField(max_length = 5)
@@ -94,7 +135,33 @@ class MortalityLifeExpectancy(models.Model):
     # User has to make a choice of country
     # Mortality rate under 5 as a stacked bar chart.
 
+class MidyearPopulationAgeSexNew(models.Model):
+    country_code = models.CharField(max_length=5)
+    country_name = models.CharField(max_length=50)
+    year = models.IntegerField()
+    sex = models.CharField(max_length=10)
+    age = models.IntegerField()
+    population = models.BigIntegerField()
 
+    class Meta:
+        db_table = 'midyear_population_age_sex_New'
+
+class CountryGenderSimilarity(models.Model):
+    country_name = models.CharField(max_length=40)
+    year = models.IntegerField()
+    distance = models.FloatField()
+
+    class Meta:
+        db_table = 'country_gender_similarity'
+
+class CountryAgeSexRatio(models.Model):
+    country_name = models.CharField(max_length=50)
+    year = models.IntegerField()
+    age = models.IntegerField()
+    ratio = models.FloatField()
+
+    class Meta:
+        db_table = 'country_age_sex_ratio'
 
 class MidyearPopulationAgeSex(models.Model):
     country_code = models.CharField(max_length=5)

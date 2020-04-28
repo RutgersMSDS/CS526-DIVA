@@ -1,26 +1,59 @@
-var countryColorIndex = 0;
-
-var worldContinentColors = {'World': '#67b7dc', 'Asia': '#845EC2', 'Africa': '#D65DB1', 'North America': '#F26430',
-'South America': '#009B72', 'Europe': '#FFC73F', 'Oceania': '#473198'};
-
-var tenCountryColors = ['#C4A69D', '#C6E0FF', '#F45D01', '#5438DC',
-    '#B56B45', '#FF9FB2', '#8F3985', '#E71D36',
-    '#21295C', '#6A0136'];
-
-var selectedData={};
-var selectedCountryNamesList = [];
-
-var colorScale = d3.scaleThreshold()
-    .domain([10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000])
-    .range(d3.schemeYlGn[9]);
-
 showPage('populationTrend', initializePopulationTrends);
 
 function initializePopulationTrends() {
-    plotWorld();
+    document.getElementById("frmHome").style.height = "1600px";
+    document.getElementsByClassName("button_continent")
+         .forEach(item => item.className = "btn btn-light button_continent");
+
+    document.getElementById("World").className = "btn btn-light button_continent active";
+
+    setContinentButtonFunctionalityForPopulation();
+
+    plotWorld(populationTrend);
     getChoroplethData(1950);
 }
 
+function initializeFertilityTrends() {
+    document.getElementById("frmHome").style.height = "2000px";
+    document.getElementsByClassName("button_continent")
+        .forEach(item => item.className = "btn btn-light button_continent button_fertility");
+
+    document.getElementById("World").className = "btn btn-light button_continent button_fertility active";
+
+    setContinentButtonFunctionalityForFertility();
+    getWorldDataForFertility();
+    setUpFertilityChoropleth();
+}
+
+function initializeGenderDistribution() {
+    firstPyramidCall();
+}
+
 function showPage(pageName, successCallback) {
-    $("#divSelect").load(pageName, successCallback)
+    clearAllCharts();
+    $("#divSelect").load(pageName, successCallback);
+}
+
+function clearAllCharts() {
+    var trends = [fertilityTrend, populationTrend, mortalityTrend];
+
+    for (var i = 0; i< trends.length; i++) {
+        trend = trends[i];
+        trend.lineChart = null;
+        trend.selectedCountryNamesList = [];
+        trend.countryColorIndex = 0;
+        trend.selectedData = {};
+        trend.choroplethData = {};
+        trend.choroplethDataIndex = 0;
+        trend.currentChoroplethData = {};
+        trend.lineDateAxis = null;
+        trend.lineValueAxis = null;
+        trend.deletePlace =  "";
+        trend.currentColor = "";
+        trend.addPlace = "World";
+        trend.fillKey = "";
+        trend.spiralChart = null;
+        trend.stackedBarChart = {};
+        trend.stackedBarDivAvailableIndex = [9,8,7,6,5,4,3,2,1,0];
+    }
 }

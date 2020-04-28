@@ -2,7 +2,7 @@
     width: 100%
 }
 
-.sphere {
+#mapDiv .sphere {
     fill: #0600b8;
 }
 
@@ -14,8 +14,63 @@
     margin:auto;
     background-color: #0600b8;
 }
-.country {
 
+#fertilityMapDiv {
+    width: 80%;
+    height: 85%;
+    left: 2.5%;
+    top: 0%;
+    margin:auto;
+    background-color: #000000;
+}
+
+.stackedBarDiv {
+    width: 9.8%;
+    height: 100%;
+    top: 0%;
+    float: left;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips specifically */
+.d3-tip.n:after {
+    margin: -2px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
+.genderRatio .sphere {
+    fill: black;
+
+}
+.genderRatio .country {
+
+    stroke: black;
+    stroke-opacity: 0.1;
+}
+
+.country {
     stroke: black;
     stroke-opacity: 0.1;
 }
@@ -26,7 +81,7 @@
 }
 
 .left-container {
-     max-width: 1200px !important;
+    max-width: 1200px !important;
 }
 
 .btn-light.hover .btn-light:hover {
@@ -49,25 +104,25 @@
     background-color: #0062cc !important;
 }
 
-.button_continent.World, .button_continent.World.active {
+#World, #World.active {
     background-color: #67b7dc !important;
 }
-.button_continent.Asia, .button_continent.Asia.active {
+#Asia, #Asia.active {
     background-color: #845EC2 !important;
 }
-.button_continent.Africa, .button_continent.Africa.active {
+#Africa, #Africa.active {
     background-color: #D65DB1 !important;
 }
-.button_continent.NorthAmerica, .button_continent.NorthAmerica.active {
+#North\ America, #North\ America.active {
     background-color: #F26430 !important;
 }
-.button_continent.SouthAmerica, .button_continent.SouthAmerica.active {
+#South\ America, #South\ America.active {
     background-color: #009B72 !important;
 }
-.button_continent.Europe, .button_continent.Europe.active {
+#Europe, #Europe.active {
     background-color: #FFC73F !important;
 }
-.button_continent.Oceania, .button_continent.Oceania.active {
+#Oceania, #Oceania.active {
     background-color: #473198 !important;
 }
 

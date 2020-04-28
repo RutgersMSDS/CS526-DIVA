@@ -1,6 +1,7 @@
 
 function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
 {
+    let formatYear = d3.timeFormat("%Y");
     let gPlot = d3.select("#" + plotId),
         gxAxis = d3.select("#" + xAxisId),
         gyAxis = d3.select("#" + yAxisId),
@@ -216,23 +217,26 @@ function drawLine(wpSliced,svgId,xAxisId,yAxisId,plotId)
             .attr('class','PathScatter')
             .attr('cx', (d) => nxScale(d.year))
             .attr('cy', (d) => nyScale(d.population))
-            .attr('r',2)
+            .attr('r',3.5)
             .attr('fill', colorDict[key])
             .on("mouseover", function(d) {
+                //console.log(d);
                 this.style.r = 7;
                 this.style.fill="black";
                 div.transition()
                     .duration(200)
+
                     .style("opacity", .9);
-                div.html("<b>" + key + "</b><br/><b>Year: </b>" + d.year + "<br/><b>Population: </b>" + (d.population/1000000).toFixed(2) + "M")
+                div	.html("<b>Year: </b>" + (d.year) + "<br/><b>Population: </b>" + (d.population/1000000).toFixed(2))
+                //div.html("<b>" + key + "</b><br/>")
                     .style("left", (d3.event.pageX - margin.left - 67) + "px")
                     .style("top", (d3.event.pageY - margin.top - margin.bottom - 70) + "px");
             })
             .on("mouseout", function(d) {
-                this.style.r = 2;
+                this.style.r = 3.5;
                 this.style.fill= colorDict[key];
                 div.transition()
-                    .duration(500)
+                    .duration(200)
                     .style("opacity", 0);
             });
     }

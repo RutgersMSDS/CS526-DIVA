@@ -1,0 +1,255 @@
+from MyApp.models import MidyearPopulationAgeSex as mpas
+from MyApp.models import MidyearPopulationAgeSexNew as mpasNew
+
+import json
+
+def getMalePopulation(countryName, yr):
+    data = dict()
+    records = mpasNew.objects.filter(country_name=countryName, year=yr, sex='Male')
+    nor = len(records) # number of records
+    mp = list()
+    for i in range(nor):
+        mp.append({
+            'age':records[i].age,
+            'population':records[i].population
+        })
+    data['malePopulation'] = mp
+    print('hello')
+    return mp
+
+def getFemalePopulation(countryName, yr):
+    data = dict()
+    records = mpasNew.objects.filter(country_name=countryName, year=yr, sex='Female')
+    nor = len(records) # number of records
+    fp = list()
+    for i in range(nor):
+        fp.append({
+            'age':records[i].age,
+            'population':records[i].population
+        })
+
+    return fp
+
+def getMalePopulationOld(countryName, yr):
+    data = dict()
+    records = mpas.objects.filter(country_name=countryName, year=yr, sex='Male')
+    mp = [
+        {'age':0 , 'population':records[0].population_0},
+        {'age':1 , 'population':records[0].population_1},
+        {'age':2 , 'population':records[0].population_2},
+        {'age':3 , 'population':records[0].population_3},
+        {'age':4 , 'population':records[0].population_4},
+        {'age':5 , 'population':records[0].population_5},
+        {'age':6 , 'population':records[0].population_6},
+        {'age':7 , 'population':records[0].population_7},
+        {'age':8 , 'population':records[0].population_8},
+        {'age':9 , 'population':records[0].population_9},
+        {'age':10 , 'population':records[0].population_10},
+        {'age':11 , 'population':records[0].population_11},
+        {'age':12 , 'population':records[0].population_12},
+        {'age':13 , 'population':records[0].population_13},
+        {'age':14 , 'population':records[0].population_14},
+        {'age':15 , 'population':records[0].population_15},
+        {'age':16 , 'population':records[0].population_16},
+        {'age':17 , 'population':records[0].population_17},
+        {'age':18 , 'population':records[0].population_18},
+        {'age':19 , 'population':records[0].population_19},
+        {'age':20 , 'population':records[0].population_20},
+        {'age':21 , 'population':records[0].population_21},
+        {'age':22 , 'population':records[0].population_22},
+        {'age':23 , 'population':records[0].population_23},
+        {'age':24 , 'population':records[0].population_24},
+        {'age':25 , 'population':records[0].population_25},
+        {'age':26 , 'population':records[0].population_26},
+        {'age':27 , 'population':records[0].population_27},
+        {'age':28 , 'population':records[0].population_28},
+        {'age':29 , 'population':records[0].population_29},
+        {'age':30 , 'population':records[0].population_30},
+        {'age':31 , 'population':records[0].population_31},
+        {'age':32 , 'population':records[0].population_32},
+        {'age':33 , 'population':records[0].population_33},
+        {'age':34 , 'population':records[0].population_34},
+        {'age':35 , 'population':records[0].population_35},
+        {'age':36 , 'population':records[0].population_36},
+        {'age':37 , 'population':records[0].population_37},
+        {'age':38 , 'population':records[0].population_38},
+        {'age':39 , 'population':records[0].population_39},
+        {'age':40 , 'population':records[0].population_40},
+        {'age':41 , 'population':records[0].population_41},
+        {'age':42 , 'population':records[0].population_42},
+        {'age':43 , 'population':records[0].population_43},
+        {'age':44 , 'population':records[0].population_44},
+        {'age':45 , 'population':records[0].population_45},
+        {'age':46 , 'population':records[0].population_46},
+        {'age':47 , 'population':records[0].population_47},
+        {'age':48 , 'population':records[0].population_48},
+        {'age':49 , 'population':records[0].population_49},
+        {'age':50 , 'population':records[0].population_50},
+        {'age':51 , 'population':records[0].population_51},
+        {'age':52 , 'population':records[0].population_52},
+        {'age':53 , 'population':records[0].population_53},
+        {'age':54 , 'population':records[0].population_54},
+        {'age':55 , 'population':records[0].population_55},
+        {'age':56 , 'population':records[0].population_56},
+        {'age':57 , 'population':records[0].population_57},
+        {'age':58 , 'population':records[0].population_58},
+        {'age':59 , 'population':records[0].population_59},
+        {'age':60 , 'population':records[0].population_60},
+        {'age':61 , 'population':records[0].population_61},
+        {'age':62 , 'population':records[0].population_62},
+        {'age':63 , 'population':records[0].population_63},
+        {'age':64 , 'population':records[0].population_64},
+        {'age':65 , 'population':records[0].population_65},
+        {'age':66 , 'population':records[0].population_66},
+        {'age':67 , 'population':records[0].population_67},
+        {'age':68 , 'population':records[0].population_68},
+        {'age':69 , 'population':records[0].population_69},
+        {'age':70 , 'population':records[0].population_70},
+        {'age':71 , 'population':records[0].population_71},
+        {'age':72 , 'population':records[0].population_72},
+        {'age':73 , 'population':records[0].population_73},
+        {'age':74 , 'population':records[0].population_74},
+        {'age':75 , 'population':records[0].population_75},
+        {'age':76 , 'population':records[0].population_76},
+        {'age':77 , 'population':records[0].population_77},
+        {'age':78 , 'population':records[0].population_78},
+        {'age':79 , 'population':records[0].population_79},
+        {'age':80 , 'population':records[0].population_80},
+        {'age':81 , 'population':records[0].population_81},
+        {'age':82 , 'population':records[0].population_82},
+        {'age':83 , 'population':records[0].population_83},
+        {'age':84 , 'population':records[0].population_84},
+        {'age':85 , 'population':records[0].population_85},
+        {'age':86 , 'population':records[0].population_86},
+        {'age':87 , 'population':records[0].population_87},
+        {'age':88 , 'population':records[0].population_88},
+        {'age':89 , 'population':records[0].population_89},
+        {'age':90 , 'population':records[0].population_90},
+        {'age':91 , 'population':records[0].population_91},
+        {'age':92 , 'population':records[0].population_92},
+        {'age':93 , 'population':records[0].population_93},
+        {'age':94 , 'population':records[0].population_94},
+        {'age':95 , 'population':records[0].population_95},
+        {'age':96 , 'population':records[0].population_96},
+        {'age':97 , 'population':records[0].population_97},
+        {'age':98 , 'population':records[0].population_98},
+        {'age':99 , 'population':records[0].population_99},
+        {'age':100 , 'population':records[0].population_100}
+    ]
+
+    #with open('MaleData.json', 'w') as json_file:
+    #    json.dump(mp, json_file)
+
+    return mp
+
+def getFemalePopulationOld(countryName, yr):
+    data = dict()
+    records = mpas.objects.filter(country_name=countryName, year=yr, sex='Female')
+    fp = [
+        {'age':0 , 'population':records[0].population_0},
+        {'age':1 , 'population':records[0].population_1},
+        {'age':2 , 'population':records[0].population_2},
+        {'age':3 , 'population':records[0].population_3},
+        {'age':4 , 'population':records[0].population_4},
+        {'age':5 , 'population':records[0].population_5},
+        {'age':6 , 'population':records[0].population_6},
+        {'age':7 , 'population':records[0].population_7},
+        {'age':8 , 'population':records[0].population_8},
+        {'age':9 , 'population':records[0].population_9},
+        {'age':10 , 'population':records[0].population_10},
+        {'age':11 , 'population':records[0].population_11},
+        {'age':12 , 'population':records[0].population_12},
+        {'age':13 , 'population':records[0].population_13},
+        {'age':14 , 'population':records[0].population_14},
+        {'age':15 , 'population':records[0].population_15},
+        {'age':16 , 'population':records[0].population_16},
+        {'age':17 , 'population':records[0].population_17},
+        {'age':18 , 'population':records[0].population_18},
+        {'age':19 , 'population':records[0].population_19},
+        {'age':20 , 'population':records[0].population_20},
+        {'age':21 , 'population':records[0].population_21},
+        {'age':22 , 'population':records[0].population_22},
+        {'age':23 , 'population':records[0].population_23},
+        {'age':24 , 'population':records[0].population_24},
+        {'age':25 , 'population':records[0].population_25},
+        {'age':26 , 'population':records[0].population_26},
+        {'age':27 , 'population':records[0].population_27},
+        {'age':28 , 'population':records[0].population_28},
+        {'age':29 , 'population':records[0].population_29},
+        {'age':30 , 'population':records[0].population_30},
+        {'age':31 , 'population':records[0].population_31},
+        {'age':32 , 'population':records[0].population_32},
+        {'age':33 , 'population':records[0].population_33},
+        {'age':34 , 'population':records[0].population_34},
+        {'age':35 , 'population':records[0].population_35},
+        {'age':36 , 'population':records[0].population_36},
+        {'age':37 , 'population':records[0].population_37},
+        {'age':38 , 'population':records[0].population_38},
+        {'age':39 , 'population':records[0].population_39},
+        {'age':40 , 'population':records[0].population_40},
+        {'age':41 , 'population':records[0].population_41},
+        {'age':42 , 'population':records[0].population_42},
+        {'age':43 , 'population':records[0].population_43},
+        {'age':44 , 'population':records[0].population_44},
+        {'age':45 , 'population':records[0].population_45},
+        {'age':46 , 'population':records[0].population_46},
+        {'age':47 , 'population':records[0].population_47},
+        {'age':48 , 'population':records[0].population_48},
+        {'age':49 , 'population':records[0].population_49},
+        {'age':50 , 'population':records[0].population_50},
+        {'age':51 , 'population':records[0].population_51},
+        {'age':52 , 'population':records[0].population_52},
+        {'age':53 , 'population':records[0].population_53},
+        {'age':54 , 'population':records[0].population_54},
+        {'age':55 , 'population':records[0].population_55},
+        {'age':56 , 'population':records[0].population_56},
+        {'age':57 , 'population':records[0].population_57},
+        {'age':58 , 'population':records[0].population_58},
+        {'age':59 , 'population':records[0].population_59},
+        {'age':60 , 'population':records[0].population_60},
+        {'age':61 , 'population':records[0].population_61},
+        {'age':62 , 'population':records[0].population_62},
+        {'age':63 , 'population':records[0].population_63},
+        {'age':64 , 'population':records[0].population_64},
+        {'age':65 , 'population':records[0].population_65},
+        {'age':66 , 'population':records[0].population_66},
+        {'age':67 , 'population':records[0].population_67},
+        {'age':68 , 'population':records[0].population_68},
+        {'age':69 , 'population':records[0].population_69},
+        {'age':70 , 'population':records[0].population_70},
+        {'age':71 , 'population':records[0].population_71},
+        {'age':72 , 'population':records[0].population_72},
+        {'age':73 , 'population':records[0].population_73},
+        {'age':74 , 'population':records[0].population_74},
+        {'age':75 , 'population':records[0].population_75},
+        {'age':76 , 'population':records[0].population_76},
+        {'age':77 , 'population':records[0].population_77},
+        {'age':78 , 'population':records[0].population_78},
+        {'age':79 , 'population':records[0].population_79},
+        {'age':80 , 'population':records[0].population_80},
+        {'age':81 , 'population':records[0].population_81},
+        {'age':82 , 'population':records[0].population_82},
+        {'age':83 , 'population':records[0].population_83},
+        {'age':84 , 'population':records[0].population_84},
+        {'age':85 , 'population':records[0].population_85},
+        {'age':86 , 'population':records[0].population_86},
+        {'age':87 , 'population':records[0].population_87},
+        {'age':88 , 'population':records[0].population_88},
+        {'age':89 , 'population':records[0].population_89},
+        {'age':90 , 'population':records[0].population_90},
+        {'age':91 , 'population':records[0].population_91},
+        {'age':92 , 'population':records[0].population_92},
+        {'age':93 , 'population':records[0].population_93},
+        {'age':94 , 'population':records[0].population_94},
+        {'age':95 , 'population':records[0].population_95},
+        {'age':96 , 'population':records[0].population_96},
+        {'age':97 , 'population':records[0].population_97},
+        {'age':98 , 'population':records[0].population_98},
+        {'age':99 , 'population':records[0].population_99},
+        {'age':100 , 'population':records[0].population_100}
+    ]
+
+    with open('FemaleData.json', 'w') as json_file:
+        json.dump(fp, json_file)
+
+    return fp
