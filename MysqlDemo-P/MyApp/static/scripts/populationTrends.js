@@ -8,9 +8,9 @@ var populationTrend = {
         'Europe': '#FFC73F',
         'Oceania': '#473198'},
     tenCountryColors: [
-        'rgb(106, 126, 107)', 'rgb(18, 104, 255)', 'rgb(244, 93, 1)', 'rgb(84, 56, 220)',
-        'rgb(181, 107, 69)', 'rgb(255, 159, 178)', 'rgb(143, 57, 133)', 'rgb(231, 29, 54)',
-        'rgb(33, 41, 92)', 'rgb(106, 1, 54)'],
+        'rgb(234, 81, 157)', 'rgb(162, 5, 126)', 'rgb(73, 0, 106)', 'rgb(50, 165, 194)',
+        'rgb(34, 85, 164)', 'rgb(8, 29, 88)', 'rgb(181, 222, 43)', 'rgb(27, 127, 65)',
+        'rgb(121, 110, 178)', 'rgb(82, 35, 141)'],
     lineChartXAxis: {
         category: 'year',
         title: 'Year'},
@@ -36,12 +36,13 @@ var populationTrend = {
     fillKey: "population",
     mapDivName: 'mapDiv',
     mapSliderName:'mapSliderDiv',
-    mapColors: d3.schemeYlGn[9],
+    mapColors: d3.schemeYlOrBr[9],
     mapDomain: [10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000],
     mapLegendTicks: ["Population range:", 10000, 100000, 1000000, 5000000, 10000000, 50000000, 100000000, 500000000, 1000000000],
     updateLegendTicks: false,
     updateLegend: null
 };
+
 populationTrend.colorScale =  function (key) {
     var scale = d3.scaleThreshold()
         .domain(populationTrend.mapDomain)

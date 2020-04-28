@@ -77,3 +77,16 @@ function removeBar(obj) {
 
     }
 }
+
+function updateBarsAccordingToSliderYear(obj) {
+    for(var i =0; i < obj.selectedCountryNamesList.length; i++) {
+        var place = obj.selectedCountryNamesList[i];
+
+        obj.deletePlace = place;
+        obj.addPlace = place;
+
+        removeBar(obj);
+        setUpFertilityCanvasBar(obj.lineChart.data)
+
+    }
+}

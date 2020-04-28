@@ -3,24 +3,16 @@ var selectedCountryNamesList = []; // List will either be empty or have single c
 var choroplethSlider;
 var choroplethSliderYear = 2000;
 var choroplethSliderAge = 0;
-var colorScale = d3.scaleThreshold()
-    .domain([80,99.5,100.5,120])
-    .range('white','magenta','chartreuse','blue','white');
-var geoMapSliderYear = 1950;
-var choroplethData; // all years
-var choroplethDataIndex;
-var currentChoroplethData;
-var gMap = d3.select("#gMap");
 var selectedCountryRatio = 100;
 
 function getColor(ratio)
 {
-    if(ratio === -1) return 'rgb(126, 3, 168)';
-    else if (ratio<80) return 'rgb(253,231,37)';
-    else if (ratio<99.5) return 'rgb(255,0,255)';
-    else if (ratio<100.5) return 'rgb(254,153,41)';
-    else if (ratio<120) return 'rgb(0, 0, 255)';
-    else return 'rgb(44,162,95)';
+    if(ratio === -1) return 'rgb(108,123,139)';
+    else if (ratio<80) return 'rgb(199,21,133)';
+    else if (ratio<99.5) return 'rgb(238,106,167)';
+    else if (ratio<100.5) return 'rgb(171,130,255)';
+    else if (ratio<120) return 'rgb(1,152,225)';
+    else return 'rgb(2,118,253)';
 }
 
 function getPyramidChoroplethData()
@@ -49,89 +41,104 @@ function getPyramidChoroplethData()
 
 function drawPyramidMap()
 {
-    const gMap = d3.select('#gMap');
+    var mapDivName = "choroplethDiv",
+
+        mapDiv = document.getElementById(mapDivName);
+
+    var outerWidth  = mapDiv.clientWidth,
+        outerHeight = mapDiv.clientHeight;
+
+    var margin = {top: 50, right: 100, bottom: 50, left: 100};
+    var width = outerWidth - margin.left - margin.right,
+        height = outerHeight - margin.top - margin.bottom;
+
+    var svg = d3.select("#" + mapDivName)
+        .append("svg")
+        .attr("id", "svg" + mapDivName)
+        .attr("border",1)
+        .attr("width",  width)
+        .attr("height", outerHeight-2)
+        .attr("transform", "translate(" +  margin.left + ", 0)");
+
+    var gMap = svg.append("g")
+        .attr("id","canvas")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" +  margin.left + "," + 2 + ")");
+
+    d3.select('#svg' + mapDivName).call(
+        d3.zoom()
+            .scaleExtent([1, 8])
+            .translateExtent([[-margin.left, -margin.top], [width, height]])
+            .extent([[0, 0], [width, height]])
+            .on('zoom' , () => {
+                gMap.attr("transform",d3.event.transform);
+            }));
 
     const projection = d3.geoNaturalEarth1();
-    projection.scale(100);
+    projection.translate([width / 2, height / 2]).scale(160);
+
     const pathGenerator = d3.geoPath().projection(projection);
-    d3.select(".sphere").remove();
-    d3.selectAll(".country").remove();
+
+    d3.select(".sphere" + mapDivName).remove();
+    d3.selectAll(".country" + mapDivName).remove();
+
     gMap.append('path')
-        .attr('class', 'sphere')
+        .attr('class', 'sphere' + mapDivName)
         .attr('d', pathGenerator({type: 'Sphere'}));
-    console.log("drawmap called");
-    d3.select('#map').call(d3.zoom().on('zoom' , () => {
-        gMap.attr("transform",d3.event.transform);
-    }))
 
-    Promise.all([
-        d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/110m.tsv'),
-        //d3.tsv('static/110m.tsv'),
-        d3.json('https://unpkg.com/world-atlas@1.1.4/world/50m.json')
-    ]).then(([tsvData,jsonData]) => {
+    console.log("choropleth");
+    const countries = topojson.feature(jsonData, jsonData.objects.countries);
 
-        //const countryNameDict = {};
-        tsvData.forEach(d => {
-            countryNameDict[d.iso_n3] = d.name;
+    gMap.selectAll('path').data(countries.features)
+        .enter().append('path')
+        .attr('class', 'country' + mapDivName)
+        .attr('d', pathGenerator)
+        .style('fill',function(d){
+            selectedCountryName = countryNameDict[d.id];
+            choroplethCountryName = getDatabaseCountryName(selectedCountryName);
+            d.ratio = pyramidChoroplethData[choroplethCountryName];
+            if(d.ratio==undefined) {d.ratio=100;}
+            return getColor(d.ratio)
         })
-        console.log("choropleth")
-        //console.log(countryNameDict.length);
-        const countries = topojson.feature(jsonData, jsonData.objects.countries);
-        //console.log(countries)
-        //console.log(countries.features)
-        gMap.selectAll('path').data(countries.features)
-            .enter().append('path')
-            .attr('class', 'country')
-            .attr('d', pathGenerator)
-            //.style('fill','white')
-            .style('fill',function(d){
-                //console.log(d.id);
-                selectedCountryName = countryNameDict[d.id];
-                //console.log(selectedCountryName)
-                choroplethCountryName = getDatabaseCountryName(selectedCountryName);
-                d.ratio = pyramidChoroplethData[choroplethCountryName];
-                if(d.ratio==undefined) {d.ratio=100;}
-                return getColor(d.ratio)
-            })
-            .on('mousedown.log', function (d) {
-                selectedCountryName = countryNameDict[d.id];
-                choroplethCountryName = getDatabaseCountryName(selectedCountryName);
-                //console.log(choroplethCountryName)
-                currentColor = this.style.fill;
-                if(currentColor=='red')
-                {
-                    d3.select(this).style('fill',getColor(d.ratio))
-                    selectedCountryNamesList = []
-                    emptyPyramid();
-                }
-                else
-                {
-                    d3.select(this).style('fill','red');
-                    oldThis = selectedCountryNamesList[0]
-                    oldRatio = selectedCountryRatio
-                    d3.select(oldThis).style('fill',getColor(oldRatio))
-                    selectedCountryNamesList[0]=this
-                    selectedCountryRatio = d.ratio
-                    console.log(choroplethCountryName)
-                    drawPyramidChart2(choroplethCountryName)
-                }
-            })
-            .append('title')
-            .attr('class','countryName')
-            .text(function(d){
-                //var countryPopulation = d.population;
-                //console.log(countryNameDict[d.id])
-                return(countryNameDict[d.id]+"\n"+d.ratio)
-            })
-    });
+        .on('mousedown.log', function (d) {
+            selectedCountryName = countryNameDict[d.id];
+            choroplethCountryName = getDatabaseCountryName(selectedCountryName);
+            //console.log(choroplethCountryName)
+            currentColor = this.style.fill;
+            if(currentColor=='white')
+            {
+                d3.select(this).style('fill',getColor(d.ratio))
+                selectedCountryNamesList = []
+                emptyPyramid();
+            }
+            else
+            {
+                d3.select(this).style('fill','white');
+                oldThis = selectedCountryNamesList[0]
+                oldRatio = selectedCountryRatio
+                d3.select(oldThis).style('fill',getColor(oldRatio))
+                selectedCountryNamesList[0]=this
+                selectedCountryRatio = d.ratio
+                console.log(choroplethCountryName)
+                drawPyramidChart2(choroplethCountryName)
+            }
+        })
+        .append('title')
+        .attr('class','countryName')
+        .text(function(d){
+            return(countryNameDict[d.id]+"\n"+d.ratio)
+        });
+
     initializePyramidChoroplethYearSlider();
     initializePyramidChoroplethAgeSlider();
     initializePyramidLegend();
-} // end of drawMap
+}
 
 function updatePyramidChoroplpeth()
 {
-    d3.selectAll(".country")
+    var mapDivName = "choroplethDiv";
+    d3.selectAll(".country" + mapDivName)
         .style("fill" , function(d){
             //console.log(d.id);
             currentColor = this.style.fill;
@@ -144,7 +151,7 @@ function updatePyramidChoroplpeth()
             if(d.ratio==undefined) {
                 d.ratio=-1;
             }
-            newColor = (currentColor=='red')?'red':getColor(d.ratio);
+            newColor = (currentColor=='white')?'white':getColor(d.ratio);
             return newColor;
         })
         .select(".countryName")
@@ -222,13 +229,30 @@ function getDatabaseCountryName(choroplethCountryName)
 
 function initializePyramidChoroplethYearSlider()
 {
-    gChoroplethSlider = d3.select("#Choropleth_Year_Slider")
+    var sliderDiv = document.getElementById("Choropleth_Year_Slider");
+    var outerWidth  = sliderDiv.clientWidth,
+        outerHeight = sliderDiv.clientHeight;
+
+    var margin = {top: 5, right: 100, bottom: 10, left: 100};
+    var width = outerWidth - margin.left - margin.right,
+        height = outerHeight - margin.top - margin.bottom;
+
+    gChoroplethSlider = d3.select("#Choropleth_Year_Slider").append("svg")
+        .attr("id", "pyramidSlider")
+        .attr("border",1)
+        .attr("width",  outerWidth)
+        .attr("height", outerHeight)
+        .append('g')
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin.left + "," + (height/2) + ")");
+
     choroplethSlider = d3
         .sliderHorizontal()
         .min(2000)
         .max(2050)
         .step(1)
-        .width(400)
+        .width(width)
         .displayValue(true)
         .on('end', val => {
             choroplethSliderYear = parseInt(val);
@@ -253,17 +277,13 @@ function initializePyramidChoroplethYearSlider()
                     }
                 }
             );
-
-            //startIndex = startYear - 1950;
-            //getChoroplethData();
-            //updateChoroplpeth();
         });
     gChoroplethSlider.call(choroplethSlider);
 }
 
 function initializePyramidLegend(){
     var colorDomain = ['Sex ratio:','No Data', '< 80', '80 - 99.5', '99.5 - 100.5', '100.5 - 120', '> 120'];
-    var legendFullHeight = 500, mapDivName="choroplethDiv";
+    var legendFullHeight = 400, mapDivName="choroplethDiv";
     var legendFullWidth = 150;
 
     var legendMargin = {top: 0, bottom: 20, left: 50, right: 20};
@@ -304,23 +324,41 @@ function initializePyramidLegend(){
         .attr('x', (d, i) => legendWidth )
         .attr('width', 100)
         .attr('height', 20)
-        .attr('fill', "white");
+        .attr('fill', "black");
 }
 
 function initializePyramidChoroplethAgeSlider()
 {
+
+    var sliderDiv = document.getElementById("Choropleth_Age_Slider");
+
+    var outerWidth  = sliderDiv.clientWidth,
+        outerHeight = sliderDiv.clientHeight;
+
+    var margin = {top: 5, right: 100, bottom: 10, left: 100};
+    var width = outerWidth - margin.left - margin.right,
+        height = outerHeight - margin.top - margin.bottom;
+
     gChoroplethSlider = d3.select("#Choropleth_Age_Slider")
+        .append("svg")
+        .attr("id", "pyramidSlider")
+        .attr("border",1)
+        .attr("width",  outerWidth)
+        .attr("height", outerHeight)
+        .append('g')
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin.left + "," + (height/2) + ")");
+
     choroplethSlider = d3
         .sliderHorizontal()
         .min(0)
         .max(100)
         .step(1)
-        .width(400)
+        .width(width)
         .displayValue(true)
         .on('end', val => {
             choroplethSliderAge = parseInt(val);
-            console.log(choroplethSliderAge)
-
             $.ajax(
                 {
                     type: "POST",
@@ -332,18 +370,11 @@ function initializePyramidChoroplethAgeSlider()
                     success: function(result)
                     {
                         pyramidChoroplethData = JSON.parse(result).pyramidChoroplethData;
-                        //console.log(pyramidChoroplethData['India']);
-                        /*choroplethDataIndex = 0;
-                        currentChoroplethData = choroplethData[choroplethSliderYear];
-                        //console.log(currentChoroplethData);*/
                         updatePyramidChoroplpeth();
                     }
                 }
             );
 
-            //startIndex = startYear - 1950;
-            //getChoroplethData();
-            //updateChoroplpeth();
         });
     gChoroplethSlider.call(choroplethSlider);
 }

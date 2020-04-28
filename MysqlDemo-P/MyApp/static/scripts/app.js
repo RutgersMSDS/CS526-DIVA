@@ -26,6 +26,7 @@ function initializeFertilityTrends() {
 }
 
 function initializeGenderDistribution() {
+    document.getElementById("frmHome").style.height = "1700px";
     firstPyramidCall();
 }
 

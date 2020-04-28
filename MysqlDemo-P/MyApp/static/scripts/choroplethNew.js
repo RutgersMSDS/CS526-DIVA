@@ -30,7 +30,6 @@ function drawMap(obj, onClickCountry, onUnClickCountry) {
         .append("svg")
         .attr("id", "svg" + mapDivName)
         .attr("border",1)
-        .style("background-color", "#0600b8;")
         .attr("width",  width)
         .attr("height", outerHeight-2)
         .attr("transform", "translate(" +  margin.left + "," + 2 + ")");
@@ -326,7 +325,7 @@ function initializeChoroplethLegend(obj, mapDivName) {
             .attr('x', (d, i) => legendWidth )
             .attr('width', 100)
             .attr('height', 20)
-            .attr('fill', "white");
+            .attr('fill', "black");
 
         obj.legendWidth = legendWidth;
     }

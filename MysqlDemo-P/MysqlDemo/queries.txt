@@ -1,0 +1,845 @@
+SELECT * FROM mydatabase.continent_population;
+
+ALTER TABLE mydatabase.continent_population
+ADD COLUMN  fertility_rate_15_19 double, 
+ADD COLUMN  fertility_rate_20_24 double, 
+ADD COLUMN  fertility_rate_25_29 double, 
+ADD COLUMN  fertility_rate_30_34 double, 
+ADD COLUMN  fertility_rate_35_39 double, 
+ADD COLUMN  fertility_rate_40_44 double, 
+ADD COLUMN  fertility_rate_45_49 double,
+ADD COLUMN  total_fertility_rate double, 
+ADD COLUMN  gross_reproduction_rate double,
+ADD COLUMN  sex_ratio_at_birth double;
+
+
+ALTER TABLE mydatabase.continent_population
+ADD COLUMN infant_mortality double,
+ADD COLUMN infant_mortality_male double,
+ADD COLUMN  infant_mortality_female double,
+ADD COLUMN  life_expectancy double,
+ADD COLUMN  life_expectancy_male double,
+ADD COLUMN  life_expectancy_female double,
+ADD COLUMN  mortality_rate_under_5 double,
+ADD COLUMN  mortality_rate_under_5_male double,
+ADD COLUMN  mortality_rate_under_5_female double,
+ADD COLUMN  mortality_rate_1_to_4 double,
+ADD COLUMN  mortality_rate_1_to_4_male double,
+ADD COLUMN  mortality_rate_1_to_4_female double;
+
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name in ('Afghanistan',
+'Bahrain',
+'Bangladesh',
+'Bhutan',
+'Brunei',
+'Burma',
+'Cambodia',
+'China',
+'East Timor',
+'Gaza Strip',
+'Hong Kong',
+'India',
+'Indonesia',
+'Iran',
+'Iraq',
+'Israel',
+'Japan',
+'Jordan',
+'Kazakhstan',
+'Korea North',
+'Korea South',
+'Kuwait',
+'Kyrgyzstan',
+'Laos',
+'Lebanon',
+'Macau',
+'Malaysia',
+'Maldives',
+'Mongolia',
+'Nepal',
+'Oman',
+'Pakistan',
+'Philippines',
+'Qatar',
+'Russian Federation',
+'Saudi Arabia',
+'Singapore',
+'Sri Lanka',
+'Syria',
+'Taiwan',
+'Tajikistan',
+'Thailand',
+'Timor-Leste',
+'Turkey',
+'Turkmenistan',
+'United Arab Emirates',
+'Uzbekistan',
+'Vietnam',
+'West Bank',
+'Yemen')
+
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'Asia';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name 
+   in ('Algeria',
+'Angola',
+'Benin',
+'Botswana',
+'Burkina',
+'Burundi',
+'Burkina Faso',
+'Cabo Verde',
+'Cameroon',
+'Cape Verde',
+'Central African Republic',
+'Chad',
+'Comoros',
+'Congo (Brazzaville)',
+'Congo, Democratic Republic of',
+'Congo (Kinshasa)',
+"cote d'Ivoire",
+'Djibouti',
+'Egypt',
+'Equatorial Guinea',
+'Eritrea',
+'Ethiopia',
+'Gabon',
+'Gambia The',
+'Ghana',
+'Guinea',
+'Guinea-Bissau',
+'Ivory Coast',
+'Kenya',
+'Lesotho',
+'Liberia',
+'Libya',
+'Madagascar',
+'Malawi',
+'Mali',
+'Mauritania',
+'Mauritius',
+'Morocco',
+'Mozambique',
+'Namibia',
+'Niger',
+'Nigeria',
+'Rwanda',
+'Saint Helena',
+'Sao Tome and Principe',
+'Senegal',
+'Seychelles',
+'Sierra Leone',
+'Somalia',
+'South Africa',
+'South Sudan',
+'Sudan',
+'Swaziland',
+'Tanzania',
+'Togo',
+'Tunisia',
+'Uganda',
+'Western Sahara',
+'Zambia',
+'Zimbabwe')
+
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'Africa';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name 
+   in ('Albania',
+'Andorra',
+'Armenia',
+'Austria',
+'Azerbaijan',
+'Belarus',
+'Belgium',
+'Bosnia and Herzegovina',
+'Bulgaria',
+'Croatia',
+'Cyprus',
+'Czech Republic',
+'Czechia',
+'Denmark',
+'Estonia',
+'Faroe Islands',
+'Finland',
+'France',
+'Georgia',
+'Germany',
+'Gibraltar',
+'Greece',
+'Guernsey',
+'Hungary',
+'Iceland',
+'Ireland',
+'Isle of Man',
+'Italy',
+'Jersey',
+'Kosovo',
+'Latvia',
+'Liechtenstein',
+'Lithuania',
+'Luxembourg',
+'Macedonia',
+'Malta',
+'Moldova',
+'Monaco',
+'Montenegro',
+'Netherlands',
+'Norway',
+'Poland',
+'Portugal',
+'Romania',
+'Russia',
+'San Marino',
+'Serbia',
+'Slovakia',
+'Slovenia',
+'Spain',
+'Sweden',
+'Switzerland',
+'Ukraine',
+'United Kingdom',
+'Vatican City')
+
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'Europe';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name 
+   in ('Antigua and Barbuda',
+'Anguilla',
+'Bahamas The',
+'Barbados',
+'Belize',
+'Bermuda',
+'Canada',
+'Cayman Islands',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Greenland',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Montserrat',
+'Nicaragua',
+'Panama',
+'Puerto Rico',
+'Saint Barthelemy',
+'Saint Kitts and Nevis',
+'Saint Lucia',
+'Saint Martin',
+'Saint Pierre and Miquelon',
+'Saint Vincent and the Grenadines',
+'Sint Maarten',
+'Trinidad and Tobago',
+'Turks and Caicos Islands',
+'United States',
+'Virgin Islands British',
+'Virgin Islands U.S.')
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'North America';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name 
+   in ('Argentina',
+'Aruba',
+'Bolivia',
+'Brazil',
+'Chile',
+'Colombia',
+'Curacao',
+'Ecuador',
+'Guyana',
+'Paraguay',
+'Peru',
+'Suriname',
+'Uruguay',
+'Venezuela')
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'South America';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   WHERE country_name 
+   in ('Australia',
+'Cook Islands',
+'Guam',
+'Fiji',
+'French Polynesia',
+'Kiribati',
+'Marshall Islands',
+'Micronesia Federated States of',
+'Nauru',
+'New Caledonia',
+'New Zealand',
+'Northern Mariana Islands',
+'Palau',
+'Papua New Guinea',
+'American Samoa',
+'Solomon Islands',
+'Tonga',
+'Tuvalu',
+'Vanuatu',
+'Wallis and Futuna')
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year AND o.continent_name = 'Oceania';
+SELECT * FROM mydatabase.continent_population;
+
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name in ('Afghanistan',
+'Bahrain',
+'Bangladesh',
+'Bhutan',
+'Brunei',
+'Burma',
+'Cambodia',
+'China',
+'East Timor',
+'Gaza Strip',
+'Hong Kong',
+'India',
+'Indonesia',
+'Iran',
+'Iraq',
+'Israel',
+'Japan',
+'Jordan',
+'Kazakhstan',
+'Korea North',
+'Korea South',
+'Kuwait',
+'Kyrgyzstan',
+'Laos',
+'Lebanon',
+'Macau',
+'Malaysia',
+'Maldives',
+'Mongolia',
+'Nepal',
+'Oman',
+'Pakistan',
+'Philippines',
+'Qatar',
+'Russian Federation',
+'Saudi Arabia',
+'Singapore',
+'Sri Lanka',
+'Syria',
+'Taiwan',
+'Tajikistan',
+'Thailand',
+'Timor-Leste',
+'Turkey',
+'Turkmenistan',
+'United Arab Emirates',
+'Uzbekistan',
+'Vietnam',
+'West Bank',
+'Yemen')
+
+   group by year
+) i 
+set o.infant_mortality = i.sum1, o.infant_mortality_male = i.sum2, o.infant_mortality_female = i.sum3, o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5, o.life_expectancy_female = i.sum6, o.mortality_rate_under_5 = i.sum7, o.mortality_rate_under_5_male = i.sum8,
+o.mortality_rate_under_5_female = i.sum9, o.mortality_rate_1_to_4 = i.sum10, o.mortality_rate_1_to_4_male = i.sum11, o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'Asia';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name 
+   in ('Algeria',
+'Angola',
+'Benin',
+'Botswana',
+'Burkina',
+'Burundi',
+'Burkina Faso',
+'Cabo Verde',
+'Cameroon',
+'Cape Verde',
+'Central African Republic',
+'Chad',
+'Comoros',
+'Congo (Brazzaville)',
+'Congo, Democratic Republic of',
+'Congo (Kinshasa)',
+"cote d'Ivoire",
+'Djibouti',
+'Egypt',
+'Equatorial Guinea',
+'Eritrea',
+'Ethiopia',
+'Gabon',
+'Gambia The',
+'Ghana',
+'Guinea',
+'Guinea-Bissau',
+'Ivory Coast',
+'Kenya',
+'Lesotho',
+'Liberia',
+'Libya',
+'Madagascar',
+'Malawi',
+'Mali',
+'Mauritania',
+'Mauritius',
+'Morocco',
+'Mozambique',
+'Namibia',
+'Niger',
+'Nigeria',
+'Rwanda',
+'Saint Helena',
+'Sao Tome and Principe',
+'Senegal',
+'Seychelles',
+'Sierra Leone',
+'Somalia',
+'South Africa',
+'South Sudan',
+'Sudan',
+'Swaziland',
+'Tanzania',
+'Togo',
+'Tunisia',
+'Uganda',
+'Western Sahara',
+'Zambia',
+'Zimbabwe')
+
+   group by year
+) i 
+set o.infant_mortality = i.sum1, o.infant_mortality_male = i.sum2, o.infant_mortality_female = i.sum3, o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5, o.life_expectancy_female = i.sum6, o.mortality_rate_under_5 = i.sum7, o.mortality_rate_under_5_male = i.sum8,
+o.mortality_rate_under_5_female = i.sum9, o.mortality_rate_1_to_4 = i.sum10, o.mortality_rate_1_to_4_male = i.sum11, o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'Africa';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name 
+   in ('Albania',
+'Andorra',
+'Armenia',
+'Austria',
+'Azerbaijan',
+'Belarus',
+'Belgium',
+'Bosnia and Herzegovina',
+'Bulgaria',
+'Croatia',
+'Cyprus',
+'Czech Republic',
+'Czechia',
+'Denmark',
+'Estonia',
+'Faroe Islands',
+'Finland',
+'France',
+'Georgia',
+'Germany',
+'Gibraltar',
+'Greece',
+'Guernsey',
+'Hungary',
+'Iceland',
+'Ireland',
+'Isle of Man',
+'Italy',
+'Jersey',
+'Kosovo',
+'Latvia',
+'Liechtenstein',
+'Lithuania',
+'Luxembourg',
+'Macedonia',
+'Malta',
+'Moldova',
+'Monaco',
+'Montenegro',
+'Netherlands',
+'Norway',
+'Poland',
+'Portugal',
+'Romania',
+'Russia',
+'San Marino',
+'Serbia',
+'Slovakia',
+'Slovenia',
+'Spain',
+'Sweden',
+'Switzerland',
+'Ukraine',
+'United Kingdom',
+'Vatican City')
+
+   group by year
+) i 
+set o.infant_mortality = i.sum1,
+ o.infant_mortality_male = i.sum2,
+ o.infant_mortality_female = i.sum3,
+ o.life_expectancy = i.sum4, 
+ o.life_expectancy_male = i.sum5,
+ o.life_expectancy_female = i.sum6,
+ o.mortality_rate_under_5 = i.sum7,
+ o.mortality_rate_under_5_male = i.sum8,
+ o.mortality_rate_under_5_female = i.sum9,
+ o.mortality_rate_1_to_4 = i.sum10,
+ o.mortality_rate_1_to_4_male = i.sum11,
+ o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'Europe';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name 
+   in ('Antigua and Barbuda',
+'Anguilla',
+'Bahamas The',
+'Barbados',
+'Belize',
+'Bermuda',
+'Canada',
+'Cayman Islands',
+'Costa Rica',
+'Cuba',
+'Dominica',
+'Dominican Republic',
+'El Salvador',
+'Grenada',
+'Greenland',
+'Guatemala',
+'Haiti',
+'Honduras',
+'Jamaica',
+'Mexico',
+'Montserrat',
+'Nicaragua',
+'Panama',
+'Puerto Rico',
+'Saint Barthelemy',
+'Saint Kitts and Nevis',
+'Saint Lucia',
+'Saint Martin',
+'Saint Pierre and Miquelon',
+'Saint Vincent and the Grenadines',
+'Sint Maarten',
+'Trinidad and Tobago',
+'Turks and Caicos Islands',
+'United States',
+'Virgin Islands British',
+'Virgin Islands U.S.')
+   group by year
+) i 
+set o.infant_mortality = i.sum1, o.infant_mortality_male = i.sum2, o.infant_mortality_female = i.sum3, o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5, o.life_expectancy_female = i.sum6, o.mortality_rate_under_5 = i.sum7, o.mortality_rate_under_5_male = i.sum8,
+o.mortality_rate_under_5_female = i.sum9, o.mortality_rate_1_to_4 = i.sum10, o.mortality_rate_1_to_4_male = i.sum11, o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'North America';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name 
+   in ('Argentina',
+'Aruba',
+'Bolivia',
+'Brazil',
+'Chile',
+'Colombia',
+'Curacao',
+'Ecuador',
+'Guyana',
+'Paraguay',
+'Peru',
+'Suriname',
+'Uruguay',
+'Venezuela')
+   group by year
+) i 
+set o.infant_mortality = i.sum1, o.infant_mortality_male = i.sum2, o.infant_mortality_female = i.sum3, o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5, o.life_expectancy_female = i.sum6, o.mortality_rate_under_5 = i.sum7, o.mortality_rate_under_5_male = i.sum8,
+o.mortality_rate_under_5_female = i.sum9, o.mortality_rate_1_to_4 = i.sum10, o.mortality_rate_1_to_4_male = i.sum11, o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'South America';
+SELECT * FROM mydatabase.continent_population;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.continent_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   WHERE country_name 
+   in ('Australia',
+'Cook Islands',
+'Guam',
+'Fiji',
+'French Polynesia',
+'Kiribati',
+'Marshall Islands',
+'Micronesia Federated States of',
+'Nauru',
+'New Caledonia',
+'New Zealand',
+'Northern Mariana Islands',
+'Palau',
+'Papua New Guinea',
+'American Samoa',
+'Solomon Islands',
+'Tonga',
+'Tuvalu',
+'Vanuatu',
+'Wallis and Futuna')
+   group by year
+) i 
+set o.infant_mortality = i.sum1, o.infant_mortality_male = i.sum2, o.infant_mortality_female = i.sum3, o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5, o.life_expectancy_female = i.sum6, o.mortality_rate_under_5 = i.sum7, o.mortality_rate_under_5_male = i.sum8,
+o.mortality_rate_under_5_female = i.sum9, o.mortality_rate_1_to_4 = i.sum10, o.mortality_rate_1_to_4_male = i.sum11, o.mortality_rate_1_to_4_female = i.sum12
+WHERE o.year = i.year AND o.continent_name = 'Oceania';
+SELECT * FROM mydatabase.continent_population;
+
+
+SELECT * FROM mydatabase.world_population;
+ALTER TABLE mydatabase.world_population
+ADD COLUMN  fertility_rate_15_19 double, 
+ADD COLUMN  fertility_rate_20_24 double, 
+ADD COLUMN  fertility_rate_25_29 double, 
+ADD COLUMN  fertility_rate_30_34 double, 
+ADD COLUMN  fertility_rate_35_39 double, 
+ADD COLUMN  fertility_rate_40_44 double, 
+ADD COLUMN  fertility_rate_45_49 double,
+ADD COLUMN  total_fertility_rate double, 
+ADD COLUMN  gross_reproduction_rate double,
+ADD COLUMN  sex_ratio_at_birth double;
+
+ALTER TABLE mydatabase.world_population
+ADD COLUMN infant_mortality double,
+ADD COLUMN infant_mortality_male double,
+ADD COLUMN  infant_mortality_female double,
+ADD COLUMN  life_expectancy double,
+ADD COLUMN  life_expectancy_male double,
+ADD COLUMN  life_expectancy_female double,
+ADD COLUMN  mortality_rate_under_5 double,
+ADD COLUMN  mortality_rate_under_5_male double,
+ADD COLUMN  mortality_rate_under_5_female double,
+ADD COLUMN  mortality_rate_1_to_4 double,
+ADD COLUMN  mortality_rate_1_to_4_male double,
+ADD COLUMN  mortality_rate_1_to_4_female double;
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.world_population as o
+JOIN
+(
+   SELECT year, AVG(fertility_rate_15_19) sum1, AVG(fertility_rate_20_24) sum2, AVG(fertility_rate_25_29) sum3,
+   AVG(fertility_rate_30_34) sum4, AVG(fertility_rate_35_39) sum5, AVG(fertility_rate_40_44) sum6, AVG(fertility_rate_45_49) sum7,
+   AVG(total_fertility_rate) sum8, AVG(gross_reproduction_rate) sum9, AVG(sex_ratio_at_birth) sum10
+   FROM mydatabase.age_specific_fertility_rates
+   group by year
+) i 
+set o.fertility_rate_15_19 = i.sum1,
+ o.fertility_rate_20_24 = i.sum2,
+ o.fertility_rate_25_29 = i.sum3,
+ o.fertility_rate_30_34 = i.sum4,
+ o.fertility_rate_35_39 = i.sum5,
+ o.fertility_rate_40_44 = i.sum6,
+ o.fertility_rate_45_49 = i.sum7,
+ o.total_fertility_rate = i.sum8,
+ o.gross_reproduction_rate = i.sum9,
+ o.sex_ratio_at_birth = i.sum10
+WHERE o.year = i.year;
+SELECT * FROM mydatabase.world_population;
+
+
+
+
+SET SQL_SAFE_UPDATES=0;
+UPDATE mydatabase.world_population as o
+JOIN
+(
+   SELECT year, AVG(infant_mortality) sum1, AVG(infant_mortality_male) sum2, AVG(infant_mortality_female) sum3,
+   AVG(life_expectancy) sum4, AVG(life_expectancy_male) sum5, AVG(life_expectancy_female) sum6, AVG(mortality_rate_under_5) sum7,
+   AVG(mortality_rate_under_5_male) sum8, AVG(mortality_rate_under_5_female) sum9, AVG(mortality_rate_1_to_4) sum10,
+   AVG(mortality_rate_1_to_4_male) sum11, AVG(mortality_rate_1_to_4_female) sum12
+   FROM mydatabase.mortality_life_expectancy
+   group by year
+) i ON o.year = i.year
+set o.infant_mortality =  i.sum1,
+ o.infant_mortality_male = i.sum2,
+ o.infant_mortality_female =  i.sum3, 
+ o.life_expectancy = i.sum4,
+o.life_expectancy_male = i.sum5,
+ o.life_expectancy_female = i.sum6,
+ o.mortality_rate_under_5 =  i.sum7,
+ o.mortality_rate_under_5_male =  i.sum8,
+o.mortality_rate_under_5_female = i.sum9,
+ o.mortality_rate_1_to_4 =.sum10,
+ o.mortality_rate_1_to_4_male = i.sum11
+ , o.mortality_rate_1_to_4_female = o.mortality_rate_1_to_4_female / i.sum12
+WHERE o.year = i.year;
+SELECT * FROM mydatabase.world_population;
